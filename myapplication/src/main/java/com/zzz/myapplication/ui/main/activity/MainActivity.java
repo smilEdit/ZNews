@@ -10,18 +10,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
 
     @Override
-    public void showError(String msg) {
-
-    }
-
-    @Override
     protected void initEventAndData() {
 
     }
 
     @Override
     protected void initInject() {
-//        getActivityComponent().inject(this);
+        getActivityComponent().inject(this);
     }
 
     @Override
