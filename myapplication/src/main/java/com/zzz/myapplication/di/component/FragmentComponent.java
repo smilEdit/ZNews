@@ -5,6 +5,11 @@ import android.app.Activity;
 import com.zzz.myapplication.di.FragmentScope;
 import com.zzz.myapplication.di.module.FragmentModule;
 import com.zzz.myapplication.model.http.RetrofitHelper;
+import com.zzz.myapplication.ui.zhihu.fragment.DailyFragment;
+import com.zzz.myapplication.ui.zhihu.fragment.HotFragment;
+import com.zzz.myapplication.ui.zhihu.fragment.SectionFragment;
+import com.zzz.myapplication.ui.zhihu.fragment.ThemeFragment;
+import com.zzz.myapplication.ui.zhihu.fragment.ZhihuMainFragment;
 
 import dagger.Component;
 
@@ -21,4 +26,13 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
+    void inject(ZhihuMainFragment zhihuMainFragment);
+
+    void inject(DailyFragment dailyFragment);
+
+    void inject(ThemeFragment themeFragment);
+
+    void inject(SectionFragment sectionFragment);
+
+    void inject(HotFragment hotFragment);
 }

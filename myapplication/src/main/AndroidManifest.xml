@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.zhihu.activity.CalendarActivity"/>
     </application>
-
+    <!--<meta-data-->
+        <!--android:value="YOUR_APP_KEY"-->
+        <!--android:name="UMENG_APPKEY"/>-->
+    <!--<meta-data-->
+        <!--android:value="${UMENG_CHANNEL_VALUE} ID"-->
+        <!--android:name="UMENG_CHANNEL"/>-->
 </manifest>

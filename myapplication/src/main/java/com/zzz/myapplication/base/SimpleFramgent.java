@@ -9,29 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
 import com.zzz.myapplication.app.App;
 import com.zzz.myapplication.di.component.DaggerFragmentComponent;
 import com.zzz.myapplication.di.component.FragmentComponent;
 import com.zzz.myapplication.di.module.FragmentModule;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * @创建者 zlf
- * @创建时间 2016/9/18 14:36
+ * @创建时间 2016/9/20 11:52
  */
-public abstract class BaseFragment<T extends BasePresenter> extends SupportFragment implements BaseView {
 
-    @Inject
-    protected T        mPresenter;
-    protected View     mView;
+//无mvp框架的简单BaseFragment
+public abstract class SimpleFramgent extends SupportFragment{
+    protected View mView;
     protected Activity mActivity;
-    protected Context  mContext;
-
-    private boolean isInited = false;
+    protected Context mContext;
 
     public static final String STATE_SAVE_IS_HIDDEN = "STATE_SAVE_IS_HIDDEN";
 
@@ -64,19 +60,15 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
                 .build();
     }
 
-    protected FragmentModule getFragmentModule() {
-        return new FragmentModule(this);
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(STATE_SAVE_IS_HIDDEN,isHidden());
+        outState.getBoolean(STATE_SAVE_IS_HIDDEN, isHidden());
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mView = inflater.inflate(getLayoutId(), null);
+        mView = inflater.inflate(getLayoutId(),null);
         initInject();
         return mView;
     }
@@ -84,52 +76,35 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.attachView(this);
         ButterKnife.bind(this, view);
-        if (savedInstanceState == null) {
-            if (isHidden()) {
-                isInited = true;
-                initEventAndData();
-            }
-        } else {
-            if (!isSupportHidden()) {
-                isInited = true;
-                initEventAndData();
-            }
-        }
+        initEventAndData();
     }
 
     @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!isInited&&hidden) {
-            isInited = true;
-            initEventAndData();
-        }
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("Fragment");
     }
 
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        MobclickAgent.onPageStart("Fragment");
-//    }
-//
-//    @Override
-//    public void onPause() {
-//        super.onPause();
-//        MobclickAgent.onPageEnd("Fragment");
-//    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("Fragment");
+    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mPresenter != null)
-            mPresenter.detachView();
     }
 
-    protected abstract void initInject();
+
+    protected FragmentModule getFragmentModule() {
+        return new FragmentModule(this);
+    }
 
     protected abstract void initEventAndData();
+
+    protected abstract void initInject();
 
     protected abstract int getLayoutId();
 }

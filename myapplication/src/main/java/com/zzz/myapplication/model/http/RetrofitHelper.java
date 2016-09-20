@@ -2,10 +2,13 @@ package com.zzz.myapplication.model.http;
 
 import com.zzz.myapplication.BuildConfig;
 import com.zzz.myapplication.app.Constants;
+import com.zzz.myapplication.model.bean.DailyBeforeListBean;
+import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.util.ZSystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
 import okhttp3.CacheControl;
@@ -14,13 +17,19 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
 
 /**
  * @创建者 zlf
  * @创建时间 2016/9/18 15:50
  */
 public class RetrofitHelper {
+
     private static OkHttpClient sOkHttpClient = null;
+    private static ZhihuApis zhihuApiService = null;
 
     public RetrofitHelper() {
         init();
@@ -28,6 +37,7 @@ public class RetrofitHelper {
 
     private void init() {
         initOkHttp();
+        zhihuApiService = getZhihuApiService();
     }
 
     private void initOkHttp() {
@@ -67,5 +77,31 @@ public class RetrofitHelper {
                 return response;
             }
         };
+        builder.cache(cache).addInterceptor(cacheInterceptor);
+        //设置超时
+        builder.connectTimeout(15, TimeUnit.SECONDS);
+        builder.readTimeout(20, TimeUnit.SECONDS);
+        builder.writeTimeout(20, TimeUnit.SECONDS);
+        //错误重连
+        builder.retryOnConnectionFailure(true);
+        sOkHttpClient = builder.build();
+    }
+
+    private static ZhihuApis getZhihuApiService() {
+        Retrofit zhihuRetrofit = new Retrofit.Builder()
+                .baseUrl(ZhihuApis.HOST)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return zhihuRetrofit.create(ZhihuApis.class);
+    }
+
+    public Observable<DailyListBean> fetchDailyListInfo() {
+        return zhihuApiService.getDailyList();
+    }
+
+    public Observable<DailyBeforeListBean> fetchDailyBeforeListInfo(String date) {
+        return zhihuApiService.getDailyBeforeList(date);
     }
 }

@@ -11,41 +11,27 @@ import com.zzz.myapplication.di.component.ActivityComponent;
 import com.zzz.myapplication.di.component.DaggerActivityComponent;
 import com.zzz.myapplication.di.module.ActivityModule;
 
-import javax.inject.Inject;
-
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
 
 /**
  * @创建者 zlf
- * @创建时间 2016/9/18 14:36
+ * @创建时间 2016/9/20 13:20
  */
-public abstract class BaseActivity<T extends BasePresenter> extends SupportActivity implements BaseView{
 
-    @Inject
-    protected T        mPresenter;
-    protected Activity mConext;
+//无mvp框架的简单BaseActivity
+public abstract class SimpleActivity extends SupportActivity {
+    protected Activity mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         ButterKnife.bind(this);
-        mConext = this;
-        initInject();
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
+        mContext = this;
         App.getInstance().addAcitivity(this);
         initEventAndData();
     }
-
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        MobclickAgent.onResume(this);
-//    }
 
     protected void setToolBar(Toolbar toolbar, String title) {
         toolbar.setTitle(title);
@@ -60,23 +46,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         });
     }
 
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        MobclickAgent.onPause(this);
-//    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mPresenter != null)
-            mPresenter.detachView();
-        App.getInstance().removeActivity(this);
-    }
-
-    protected ActivityComponent getActivityComponent(){
-        return  DaggerActivityComponent.builder()
+    protected ActivityComponent getActivityComponent() {
+        return DaggerActivityComponent.builder()
                 .appComponent(App.getAppComponent())
                 .activityModule(getActivityModule())
                 .build();
@@ -86,7 +57,25 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
         return new ActivityModule(this);
     }
 
+    //    @Override
+    //    protected void onResume() {
+    //        super.onResume();
+    //        MobclickAgent.onResume(this);
+    //    }
+
+    //    @Override
+    //    protected void onPause() {
+    //        super.onPause();
+    //        MobclickAgent.onPause(this);
+    //    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        App.getInstance().removeActivity(this);
+    }
+
     protected abstract void initEventAndData();
-    protected abstract void initInject();
+
     protected abstract int getLayout();
 }
