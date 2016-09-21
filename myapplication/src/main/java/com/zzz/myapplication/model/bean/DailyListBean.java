@@ -65,6 +65,17 @@ public class DailyListBean {
         private String       title;
         private List<String> images;
 
+        @Override
+        public String toString() {
+            return "StoriesBean{" +
+                    "type=" + type +
+                    ", id=" + id +
+                    ", ga_prefix='" + ga_prefix + '\'' +
+                    ", title='" + title + '\'' +
+                    ", images=" + images +
+                    '}';
+        }
+
         public int getType() {
             return type;
         }

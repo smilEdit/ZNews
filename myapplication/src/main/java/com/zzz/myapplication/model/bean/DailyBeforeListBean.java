@@ -40,7 +40,14 @@ public class DailyBeforeListBean {
         this.stories = stories;
     }
 
-//    public static class StoriesBean {
+    @Override
+    public String toString() {
+        return "DailyBeforeListBean{" +
+                "date='" + date + '\'' +
+                ", stories=" + stories +
+                '}';
+    }
+    //    public static class StoriesBean {
 //        private int          type;
 //        private int          id;
 //        private String       ga_prefix;

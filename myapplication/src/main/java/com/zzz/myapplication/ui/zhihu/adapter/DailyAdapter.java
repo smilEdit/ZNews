@@ -14,6 +14,7 @@ import com.zzz.myapplication.R;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.util.ZImageLoader;
+import com.zzz.myapplication.util.ZLog;
 
 import java.util.List;
 
@@ -155,6 +156,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public void addDailyBeforeDate(DailyBeforeListBean info) {
+        ZLog.i(info.toString());
         mTitle = info.getDate();
         mList = info.getStories();
         isBefore = false;

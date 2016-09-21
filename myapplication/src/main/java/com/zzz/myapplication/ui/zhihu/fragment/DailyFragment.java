@@ -18,6 +18,7 @@ import com.zzz.myapplication.ui.zhihu.activity.CalendarActivity;
 import com.zzz.myapplication.ui.zhihu.adapter.DailyAdapter;
 import com.zzz.myapplication.util.ZCircularAnim;
 import com.zzz.myapplication.util.ZDate;
+import com.zzz.myapplication.util.ZLog;
 import com.zzz.myapplication.util.ZToast;
 
 import java.util.ArrayList;
@@ -89,6 +90,8 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     public void showMoreContent(String date, DailyBeforeListBean info) {
+        ZLog.i(date.toString());
+        ZLog.i(info.toString());
         mSrlDailyRefresh.setRefreshing(false);
         currentDate = String.valueOf(Integer.valueOf(info.getDate() + 1));
         mRlDailyLoading.stop();
@@ -107,6 +110,11 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
         mRlDailyLoading.start();
         mRvDailyList.setVisibility(View.INVISIBLE);
 
+    }
+
+    @Override
+    public void doInterval(int currentCount) {
+//        mAdapter.changeTopPager(currentCount);
     }
 
     @OnClick(R.id.fab_daily_calender)

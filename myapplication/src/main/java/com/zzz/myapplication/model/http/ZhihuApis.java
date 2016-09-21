@@ -18,24 +18,24 @@ public interface ZhihuApis {
     /**
      * 最新日报
      */
-    @GET("stories/latest")
+    @GET("news/latest")
     Observable<DailyListBean> getDailyList();
 
     /**
      * 往期日报
      */
-    @GET("stories/before/{date}")
+    @GET("news/before/{date}")
     Observable<DailyBeforeListBean> getDailyBeforeList(@Path("date") String date);
 
-    //    /**
-    //     * 获取日报详情数据
-    //     *
-    //     * @param id
-    //     * @return
-    //     */
-    //    @GET("story/{id}")
-    //    Observable<DailyDetail> getNewsDetails(@Path("id") int id);
-    //
+//        /**
+//         * 获取日报详情数据
+//         *
+//         * @param id
+//         * @return
+//         */
+//        @GET("story/{id}")
+//        Observable<DailyDetail> getNewsDetails(@Path("id") int id);
+
     //    /**
     //     * 根据分辨率获取启动界面图片
     //     *

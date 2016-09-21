@@ -59,5 +59,6 @@ public class CalendarActivity extends SimpleActivity {
     void chooseDate() {
         RxBus.getDefault().post(mData);
         ZToast.showShortToast(mContext,mData.toString());
+        finish();
     }
 }
