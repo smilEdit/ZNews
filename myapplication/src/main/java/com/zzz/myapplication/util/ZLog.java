@@ -10,7 +10,7 @@ import com.zzz.myapplication.BuildConfig;
 public class ZLog {
 
     public static boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "com.codeest.geeknews";
+    private static final String TAG = "com.zzz.myapplication";
 
     public static void e(String tag,Object o) {
         if(isDebug) {
