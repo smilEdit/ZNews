@@ -70,7 +70,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
         mRvThemeContent.setVisibility(View.VISIBLE);
         mList.clear();
         mList.addAll(themeListBean.getOthers());
-        ZLog.i(mList.toString());
     }
 
 

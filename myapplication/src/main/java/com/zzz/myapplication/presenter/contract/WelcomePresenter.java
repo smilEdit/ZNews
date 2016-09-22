@@ -3,6 +3,7 @@ package com.zzz.myapplication.presenter.contract;
 import com.zzz.myapplication.base.RxPresenter;
 import com.zzz.myapplication.model.bean.WelcomeBean;
 import com.zzz.myapplication.model.http.RetrofitHelper;
+import com.zzz.myapplication.util.ZLog;
 import com.zzz.myapplication.util.ZRx;
 
 import java.util.concurrent.TimeUnit;
@@ -20,9 +21,9 @@ import rx.functions.Action1;
 
 public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implements WelcomeContract.Presenter {
 
-    public static final String RES = "1080*1920";
+    public static final String RES = "1080*1600";
 
-    public static final int COUNT_DOWN_TIME = 2200;
+    public static final int COUNT_DOWN_TIME = 2048;
 
     private RetrofitHelper mRetrofitHelper;
 
@@ -44,6 +45,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        ZLog.w(throwable.toString());
                         mView.showError("");
                     }
                 });
@@ -51,7 +53,7 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
     }
 
     private void startCountDown() {
-        Subscription rxSubscription = Observable.timer(COUNT_DOWN_TIME, TimeUnit.MICROSECONDS)
+        Subscription rxSubscription = Observable.timer(COUNT_DOWN_TIME, TimeUnit.MILLISECONDS)
                 .compose(ZRx.<Long>rxSchedulerHelper())
                 .subscribe(new Action1<Long>() {
                     @Override

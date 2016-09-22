@@ -45,7 +45,6 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @Override
     public void showContent(WelcomeBean welcomeBean) {
-        ZLog.i(welcomeBean.toString());
         ZImageLoader.setImg(this,welcomeBean.getImg(),mIvWelcomeBg);
         mIvWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
         mTvWelcomeAuthor.setText(welcomeBean.getText());
