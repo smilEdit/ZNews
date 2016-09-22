@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".ui.main.activity.MainActivity">
 
-    <include layout="@layout/view_toolbar"
-        android:id="@+id/tb_main"/>
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/dl_main"
+    <include
+        android:id="@+id/tb_main"
+        layout="@layout/view_toolbar"/>
+
+    <FrameLayout
+        android:id="@+id/fl_main_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/tb_main"
-        android:orientation="vertical">
-
-        <FrameLayout
-            android:id="@+id/fl_main_content"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </FrameLayout>
+</LinearLayout>
+    <!--    <android.support.v4.widget.DrawerLayout
+            android:id="@+id/dl_main"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </FrameLayout>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tb_main"
+            android:orientation="vertical">
+        </android.support.v4.widget.DrawerLayout>-->
 
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nv_main"
-        android:layout_width="240dp"
-        app:headerLayout="@layout/view_drawer_header"
-        android:layout_gravity="start"
-        app:menu="@menu/drawer_menu"
-        android:layout_height="match_parent">
-    </android.support.design.widget.NavigationView>
-    </android.support.v4.widget.DrawerLayout>
-</RelativeLayout>
+    <!--<android.support.design.widget.NavigationView-->
+    <!--android:id="@+id/nv_main"-->
+    <!--android:layout_width="240dp"-->
+    <!--app:headerLayout="@layout/view_drawer_header"-->
+    <!--android:layout_gravity="start"-->
+    <!--app:menu="@menu/drawer_menu"-->
+    <!--android:layout_height="match_parent">-->
+    <!--</android.support.design.widget.NavigationView>-->
