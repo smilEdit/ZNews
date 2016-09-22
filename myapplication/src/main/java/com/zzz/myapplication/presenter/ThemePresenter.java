@@ -32,13 +32,12 @@ public class ThemePresenter extends RxPresenter<ThemeContract.View> implements T
                 .subscribe(new Action1<ThemeListBean>() {
                     @Override
                     public void call(ThemeListBean themeListBean) {
-                        ZLog.i(themeListBean.toString());
                         mView.showContent(themeListBean);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError();
+                        mView.showError("");
                         ZLog.i(throwable.toString());
                     }
                 });

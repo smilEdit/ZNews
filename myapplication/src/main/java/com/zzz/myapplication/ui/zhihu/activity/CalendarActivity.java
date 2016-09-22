@@ -13,7 +13,6 @@ import com.zzz.myapplication.R;
 import com.zzz.myapplication.base.SimpleActivity;
 import com.zzz.myapplication.component.RxBus;
 import com.zzz.myapplication.util.ZDate;
-import com.zzz.myapplication.util.ZToast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -58,7 +57,6 @@ public class CalendarActivity extends SimpleActivity {
     @OnClick(R.id.tv_calender_enter)
     void chooseDate() {
         RxBus.getDefault().post(mData);
-        ZToast.showShortToast(mContext,mData.toString());
         finish();
     }
 }

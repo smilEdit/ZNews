@@ -21,7 +21,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!--main-->
+
+
+        <!--zhihu-->
+        <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"/>
         <activity android:name=".ui.zhihu.activity.CalendarActivity"/>
+
+        <!--meihzi-->
+
+        <!--wechat-->
+
     </application>
     <!--<meta-data-->
         <!--android:value="YOUR_APP_KEY"-->

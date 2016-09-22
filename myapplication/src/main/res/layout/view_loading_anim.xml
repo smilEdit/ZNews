@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.victor.loading.rotate.RotateLoading
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading_anmi"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_gravity="center"
+    app:loading_color="@color/colorPrimary"
+    app:loading_width="5dp"
+    tools:showIn="@layout/fragment_daily"/>

@@ -66,15 +66,16 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
 
     @Override
     public void showContent(ThemeListBean themeListBean) {
-        ZLog.i(themeListBean.toString());
         mViewLoading.stop();
         mRvThemeContent.setVisibility(View.VISIBLE);
         mList.clear();
         mList.addAll(themeListBean.getOthers());
+        ZLog.i(mList.toString());
     }
 
+
     @Override
-    public void showError() {
+    public void showError(String msg) {
         mViewLoading.stop();
         mRvThemeContent.setVisibility(View.VISIBLE);
         ZToast.showLongToast(mContext, "数据加载失败");

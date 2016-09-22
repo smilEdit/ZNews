@@ -34,6 +34,8 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private String mTitle = "今日热闻";
     private Context mContext;
     private TopPagerAdapter mAdapter;
+    private ViewPager mTopViewPager;
+
 
     public enum ITEM_TYPE {
         ITEM_TOP,       //滚动栏
@@ -59,7 +61,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ContentViewHolder) {
             DailyListBean.StoriesBean item;
             if(isBefore) {
@@ -82,6 +84,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             ((DateViewHolder) holder).tvDate.setText(mTitle);
         } else {
             ((TopViewHolder) holder).vpTop.setAdapter(mAdapter);
+            mTopViewPager = ((TopViewHolder) holder).vpTop;
         }
     }
 
@@ -159,6 +162,11 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         mList = info.getStories();
         isBefore = false;
         notifyDataSetChanged();
+    }
+    public void changeTopPager(int currentCount) {
+        if (!isBefore && mTopViewPager != null) {
+            mTopViewPager.setCurrentItem(currentCount);
+        }
     }
 
     //item点击回调

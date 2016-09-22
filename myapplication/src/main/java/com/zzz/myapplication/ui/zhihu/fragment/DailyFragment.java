@@ -15,6 +15,7 @@ import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.presenter.DailyPresenter;
 import com.zzz.myapplication.presenter.contract.DailyContract;
 import com.zzz.myapplication.ui.zhihu.activity.CalendarActivity;
+import com.zzz.myapplication.ui.zhihu.activity.ZhihuDetailActivity;
 import com.zzz.myapplication.ui.zhihu.adapter.DailyAdapter;
 import com.zzz.myapplication.util.ZCircularAnim;
 import com.zzz.myapplication.util.ZDate;
@@ -41,7 +42,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     SwipeRefreshLayout   mSrlDailyRefresh;
 
     DailyAdapter mAdapter;
-    String       currentDate;
+    String       mCurrentDate;
 
     List<DailyListBean.StoriesBean> mList = new ArrayList<>();
 
@@ -57,18 +58,27 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     protected void initEventAndData() {
-        currentDate = ZDate.getCurrentDate();
+        mCurrentDate = ZDate.getCurrentDate();
         mAdapter = new DailyAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-
+                Intent intent = new Intent();
+                intent.setClass(mContext, ZhihuDetailActivity.class);
+                intent.putExtra("id", id);
+                mContext.startActivity(intent);
             }
         });
         mSrlDailyRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.getBeforeData(currentDate);
+                mRvDailyList.setVisibility(View.INVISIBLE);
+                mRlDailyLoading.start();
+                if (mCurrentDate.equals("今日新闻")) {
+                    mPresenter.getDailyData();
+                } else {
+                    mPresenter.getBeforeData(mCurrentDate);
+                }
             }
         });
         mRvDailyList.setLayoutManager(new LinearLayoutManager(mContext));
@@ -83,19 +93,20 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
         mRlDailyLoading.stop();
         mRvDailyList.setVisibility(View.VISIBLE);
         mAdapter.addDailyDate(info);
+        mPresenter.startInterval();
     }
 
     @Override
     public void showMoreContent(String date, DailyBeforeListBean info) {
         mSrlDailyRefresh.setRefreshing(false);
-        currentDate = String.valueOf(Integer.valueOf(info.getDate() + 1));
+        mCurrentDate = String.valueOf(Integer.valueOf(info.getDate() + 1));
         mRlDailyLoading.stop();
         mRvDailyList.setVisibility(View.VISIBLE);
         mAdapter.addDailyBeforeDate(info);
     }
 
     @Override
-    public void showError() {
+    public void showError(String msg) {
         mRlDailyLoading.stop();
         ZToast.showShortToast(mContext,"数据加载失败");
     }
@@ -109,7 +120,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     public void doInterval(int currentCount) {
-//        mAdapter.changeTopPager(currentCount);
+        mAdapter.changeTopPager(currentCount);
     }
 
     @OnClick(R.id.fab_daily_calender)

@@ -4,6 +4,7 @@ import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.bean.DetailExtraBean;
 import com.zzz.myapplication.model.bean.ThemeListBean;
+import com.zzz.myapplication.model.bean.WelcomeBean;
 import com.zzz.myapplication.model.bean.ZhihuDetailBean;
 
 import retrofit2.http.GET;
@@ -33,7 +34,7 @@ public interface ZhihuApis {
     /**
      * 专题日报
      */
-    @GET("theme")
+    @GET("themes")
     Observable<ThemeListBean> getThemeList();
 
     /**
@@ -47,4 +48,11 @@ public interface ZhihuApis {
      */
     @GET("story-extra/{id}")
     Observable<DetailExtraBean> getDetailExtraInfo(@Path("id")int id);
+
+    /**
+     * 欢迎界面
+     */
+    @GET("start-image/{res}")
+    Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
+
 }

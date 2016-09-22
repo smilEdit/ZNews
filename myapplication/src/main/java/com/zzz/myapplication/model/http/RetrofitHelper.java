@@ -6,7 +6,9 @@ import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.bean.DetailExtraBean;
 import com.zzz.myapplication.model.bean.ThemeListBean;
+import com.zzz.myapplication.model.bean.WelcomeBean;
 import com.zzz.myapplication.model.bean.ZhihuDetailBean;
+import com.zzz.myapplication.util.ZLog;
 import com.zzz.myapplication.util.ZSystem;
 
 import java.io.File;
@@ -119,4 +121,10 @@ public class RetrofitHelper {
     public Observable<ZhihuDetailBean> fetchDetailInfo(int id) {
         return zhihuApiService.getDetailInfo(id);
     }
+
+    public Observable<WelcomeBean> fetchWelcomeBean(String res) {
+        ZLog.i(res);
+        return zhihuApiService.getWelcomeInfo(res);
+    }
+
 }

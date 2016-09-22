@@ -25,4 +25,8 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
         return R.layout.fragment_section;
     }
 
+    @Override
+    public void showError(String msg) {
+
+    }
 }

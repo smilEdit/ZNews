@@ -24,4 +24,9 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     protected int getLayoutId() {
         return R.layout.fragment_hot;
     }
+
+    @Override
+    public void showError(String msg) {
+
+    }
 }

@@ -9,13 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.victor.loading.rotate.RotateLoading
-            android:id="@+id/rl_daily_loading"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            app:loading_color="@color/colorPrimary"
-            app:loading_width="5dp"/>
+        <include layout="@layout/view_loading_anim"
+                 android:id="@+id/rl_daily_loading"/>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_daily_list"
             android:overScrollMode="never"

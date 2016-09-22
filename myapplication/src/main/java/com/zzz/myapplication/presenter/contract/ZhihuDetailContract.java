@@ -16,7 +16,6 @@ public interface ZhihuDetailContract {
 
         void showExtraInfo(DetailExtraBean detailExtraBean);
 
-        void showError();
     }
 
     interface Presenter extends BasePresenter<View> {

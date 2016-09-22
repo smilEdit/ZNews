@@ -85,7 +85,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                             public void call(Throwable throwable) {
                                 registerEvent();
                                 ZLog.i(throwable.toString());
-                                mView.showError();
+                                mView.showError("");
                             }});
         addSubscrebe(rxSubscription);
     }
@@ -104,7 +104,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                     @Override
                     public void call(Throwable throwable) {
                         ZLog.i(throwable.toString());
-                        mView.showError();
+                        mView.showError("");
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -125,7 +125,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError();
+                        mView.showError("");
                     }
                 });
         addSubscrebe(rxSubscription);

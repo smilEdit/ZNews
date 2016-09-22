@@ -12,7 +12,7 @@ public interface ThemeContract {
     interface View extends BaseView {
         void showContent(ThemeListBean themeListBean);
 
-        void showError();
+
     }
 
     interface Presenter extends BasePresenter<View> {
