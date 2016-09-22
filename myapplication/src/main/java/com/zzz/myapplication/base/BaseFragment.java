@@ -87,7 +87,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         mPresenter.attachView(this);
         ButterKnife.bind(this, view);
         if (savedInstanceState == null) {
-            if (isHidden()) {
+            if (!isHidden()) {
                 isInited = true;
                 initEventAndData();
             }

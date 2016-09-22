@@ -6,6 +6,7 @@ import com.zzz.myapplication.di.ActivityScope;
 import com.zzz.myapplication.di.module.ActivityModule;
 import com.zzz.myapplication.model.http.RetrofitHelper;
 import com.zzz.myapplication.ui.main.activity.MainActivity;
+import com.zzz.myapplication.ui.zhihu.activity.ZhihuDetailActivity;
 
 import dagger.Component;
 
@@ -23,4 +24,7 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(MainActivity mainActivity);
+
+    void inject(ZhihuDetailActivity zhihuDetailActivity);
 }
+

@@ -59,7 +59,6 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                         if(day.length() < 2) {
                             day = "0" + day;
                         }
-                        ZLog.i("map"+year+month+day);
                         return date.append(year).append(month).append(day).toString();
                     }
                 })
@@ -67,7 +66,6 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 .flatMap(new Func1<String, Observable<DailyBeforeListBean>>() {
                     @Override
                     public Observable<DailyBeforeListBean> call(String date) {
-                        ZLog.i("flatMap"+date.toString());
                         return mRetrofitHelper.fetchDailyBeforeListInfo(date);
                     }
                 })

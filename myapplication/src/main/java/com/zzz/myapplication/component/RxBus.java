@@ -1,5 +1,7 @@
 package com.zzz.myapplication.component;
 
+import com.zzz.myapplication.util.ZLog;
+
 import rx.Observable;
 import rx.subjects.PublishSubject;
 import rx.subjects.SerializedSubject;
@@ -27,6 +29,7 @@ public class RxBus {
 
     // 提供了一个新的事件
     public void post(Object o) {
+        ZLog.i(o.toString());
         bus.onNext(o);
     }
 

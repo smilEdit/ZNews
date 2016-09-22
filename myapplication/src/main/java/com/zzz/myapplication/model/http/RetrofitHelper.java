@@ -4,7 +4,9 @@ import com.zzz.myapplication.BuildConfig;
 import com.zzz.myapplication.app.Constants;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
-import com.zzz.myapplication.util.ZLog;
+import com.zzz.myapplication.model.bean.DetailExtraBean;
+import com.zzz.myapplication.model.bean.ThemeListBean;
+import com.zzz.myapplication.model.bean.ZhihuDetailBean;
 import com.zzz.myapplication.util.ZSystem;
 
 import java.io.File;
@@ -103,7 +105,18 @@ public class RetrofitHelper {
     }
 
     public Observable<DailyBeforeListBean> fetchDailyBeforeListInfo(String date) {
-        ZLog.i(date.toString());
         return zhihuApiService.getDailyBeforeList(date);
+    }
+
+    public Observable<ThemeListBean> fetchThemeListBean() {
+        return zhihuApiService.getThemeList();
+    }
+
+    public Observable<DetailExtraBean> fetchDetailExtraBean(int id) {
+        return zhihuApiService.getDetailExtraInfo(id);
+    }
+
+    public Observable<ZhihuDetailBean> fetchDetailInfo(int id) {
+        return zhihuApiService.getDetailInfo(id);
     }
 }
