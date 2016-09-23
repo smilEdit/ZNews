@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="actionMenuTextColor">#ffffff</item>
+        <!--沉浸状态栏-->
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
     <style name="bottom_text">
@@ -16,6 +20,10 @@
         <item name="android:drawablePadding">3dp</item>
     </style>
 
+    <style name="TextAppearance.ExpandedTitle"
+           parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">26sp</item>
+    </style>
     <!--
         //ActionBarDrawerToggle设置颜色
         <item name="colorControlNormal">@android:color/white</item>-->

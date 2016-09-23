@@ -59,12 +59,21 @@ public class DailyListBean {
     }
 
     public static class StoriesBean {
+        private boolean readState;
         private int          type;
         private int          id;
         private String       ga_prefix;
         private String       title;
         private List<String> images;
 
+
+        public boolean getReadState() {
+            return readState;
+        }
+
+        public void setReadState(boolean readState) {
+            this.readState = readState;
+        }
         @Override
         public String toString() {
             return "StoriesBean{" +

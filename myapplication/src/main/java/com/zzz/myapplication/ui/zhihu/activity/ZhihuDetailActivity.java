@@ -1,14 +1,13 @@
 package com.zzz.myapplication.ui.zhihu.activity;
 
 import android.content.Intent;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.NestedScrollView;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.victor.loading.rotate.RotateLoading;
@@ -23,6 +22,8 @@ import com.zzz.myapplication.util.ZImageLoader;
 import com.zzz.myapplication.util.ZSnack;
 import com.zzz.myapplication.util.ZToast;
 
+import net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -36,9 +37,9 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
 
 
     @BindView(R.id.iv_detail_bar)
-    ImageView        mIvDetailBar;
+    ImageView               mIvDetailBar;
     @BindView(R.id.tv_detail_bar)
-    TextView         mTvDetailBar;
+    TextView                mTvDetailBar;
     @BindView(R.id.ctl_detail_title)
     CollapsingToolbarLayout mCtlDetailTitle;
     @BindView(R.id.wv_detail_centent)
@@ -54,7 +55,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @BindView(R.id.tv_detail_bottom_share)
     TextView         mTvDetailBottomShare;
     @BindView(R.id.ll_detail_bottom)
-    LinearLayout     mLlDetailBottom;
+    FrameLayout      mLlDetailBottom;
     private int mId;
     private boolean isBottomShow = true;
 
@@ -110,7 +111,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @Override
     public void showExtraInfo(DetailExtraBean detailExtraBean) {
         mLoadingAnmi.stop();
-        mTvDetailBottomLike.setText(String.format("%d赞",detailExtraBean.getPopularity()));
+        mTvDetailBottomLike.setText(String.format("%d个赞",detailExtraBean.getPopularity()));
         mTvDetailBottomComment.setText(String.format("%d条评论",detailExtraBean.getComments()));
     }
 

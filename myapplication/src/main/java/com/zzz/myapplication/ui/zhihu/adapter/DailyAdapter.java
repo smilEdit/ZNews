@@ -1,6 +1,8 @@
 package com.zzz.myapplication.ui.zhihu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,10 +33,10 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private LayoutInflater mInflater;
     private boolean isBefore = false;
-    private String mTitle = "今日热闻";
-    private Context mContext;
+    private String  mTitle   = "今日热闻";
+    private Context         mContext;
     private TopPagerAdapter mAdapter;
-    private ViewPager mTopViewPager;
+    private ViewPager       mTopViewPager;
 
 
     public enum ITEM_TYPE {
@@ -43,7 +45,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         ITEM_CONTENT    //内容
     }
 
-    public DailyAdapter(Context context,List<DailyListBean.StoriesBean> list) {
+    public DailyAdapter(Context context, List<DailyListBean.StoriesBean> list) {
         this.mList = list;
         this.mContext = context;
         mInflater = LayoutInflater.from(mContext);
@@ -51,10 +53,10 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(viewType == ITEM_TYPE.ITEM_TOP.ordinal()) {
-            mAdapter = new TopPagerAdapter(mContext,mTopList);
+        if (viewType == ITEM_TYPE.ITEM_TOP.ordinal()) {
+            mAdapter = new TopPagerAdapter(mContext, mTopList);
             return new TopViewHolder(mInflater.inflate(R.layout.item_top, parent, false));
-        } else if(viewType == ITEM_TYPE.ITEM_DATE.ordinal()) {
+        } else if (viewType == ITEM_TYPE.ITEM_DATE.ordinal()) {
             return new DateViewHolder(mInflater.inflate(R.layout.item_date, parent, false));
         }
         return new ContentViewHolder(mInflater.inflate(R.layout.item_daily, parent, false));
@@ -63,20 +65,27 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof ContentViewHolder) {
-            DailyListBean.StoriesBean item;
-            if(isBefore) {
-                item = mList.get(position - 1);
+            final int contentPosition;
+            if (isBefore) {
+                contentPosition = position - 1;
             } else {
-                item = mList.get(position - 2);
+                contentPosition = position - 2;
             }
-            ((ContentViewHolder)holder).title.setText(item.getTitle());
-            ZImageLoader.setImg(mContext,item.getImages().get(0),((ContentViewHolder)holder).image);
-            holder.itemView.setTag(item.getId());
+            ((ContentViewHolder) holder).title.setText(mList.get(contentPosition).getTitle());
+            if (mList.get(contentPosition).getReadState()) {
+                ((ContentViewHolder) holder).title.setTextColor(ContextCompat.getColor(mContext, R.color.md_grey_500_color_code));
+            } else {
+                ((ContentViewHolder)holder).title.setTextColor(ContextCompat.getColor(mContext,R.color.md_black_color_code));
+            }
+            ZImageLoader.setImg(mContext, mList.get(contentPosition).getImages().get(0), ((ContentViewHolder) holder).image);
+//            holder.itemView.setTag(item.getId());
+            Intent intent = new Intent();
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if(onItemClickListener != null) {
-                        onItemClickListener.onItemClick((Integer) view.getTag());
+                    if (onItemClickListener != null) {
+                        ImageView iv = (ImageView) view.findViewById(R.id.iv_daily_item_image);
+                        onItemClickListener.onItemClick(contentPosition,iv);
                     }
                 }
             });
@@ -121,7 +130,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public ContentViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -132,7 +141,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
         public DateViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -163,6 +172,15 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         isBefore = false;
         notifyDataSetChanged();
     }
+
+    public boolean getIsBefore() {
+        return isBefore;
+    }
+
+    public void setReadState(int position, boolean readState) {
+        mList.get(position).setReadState(readState);
+    }
+
     public void changeTopPager(int currentCount) {
         if (!isBefore && mTopViewPager != null) {
             mTopViewPager.setCurrentItem(currentCount);
@@ -176,7 +194,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
-        void onItemClick(int id);
+    public interface OnItemClickListener {
+        void onItemClick(int position,View view);
     }
 }

@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import com.zzz.myapplication.di.FragmentScope;
 import com.zzz.myapplication.di.module.FragmentModule;
-import com.zzz.myapplication.model.http.RetrofitHelper;
 import com.zzz.myapplication.ui.zhihu.fragment.DailyFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.HotFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.SectionFragment;
@@ -22,7 +21,7 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class,modules = FragmentModule.class)
 public interface FragmentComponent {
 
-    RetrofitHelper getRetrofitHelper();
+//    RetrofitHelper getRetrofitHelper();
 
     Activity getActivity();
 

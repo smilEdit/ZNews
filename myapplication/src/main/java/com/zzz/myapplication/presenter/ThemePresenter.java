@@ -26,7 +26,6 @@ public class ThemePresenter extends RxPresenter<ThemeContract.View> implements T
 
     @Override
     public void getThemeData() {
-        ZLog.i("getThemeData");
         mRetrofitHelper.fetchThemeListBean()
                 .compose(ZRx.<ThemeListBean>rxSchedulerHelper())
                 .subscribe(new Action1<ThemeListBean>() {

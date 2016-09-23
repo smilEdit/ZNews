@@ -43,7 +43,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     @Override
     protected void initEventAndData() {
 
-        ZLog.i("initEventAndData");
         mAdapter = new ThemeAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
@@ -60,7 +59,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
 
     @Override
     protected int getLayoutId() {
-        ZLog.i("getLayoutId");
         return R.layout.fragment_theme;
     }
 

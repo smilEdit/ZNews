@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout
             android:id="@+id/ctl_detail_title"
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_image_height"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -54,68 +55,89 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
-        </android.support.design.widget.CollapsingToolbarLayout>
+        </net.opacapp.multilinecollapsingtoolbar.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nsv_detail_content"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:scrollbars="vertical"
-        android:layout_height="match_parent">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <WebView
-                android:isScrollContainer="false"
-                android:overScrollMode="never"
-                android:scrollbars="vertical"
                 android:id="@+id/wv_detail_centent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:isScrollContainer="false"
+                android:overScrollMode="never"
+                android:scrollbars="vertical"/>
 
             <include layout="@layout/view_loading_anim"/>
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>
-    <LinearLayout
+
+    <FrameLayout
         android:id="@+id/ll_detail_bottom"
-        android:elevation="3dp"
-        android:padding="3dp"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:background="@android:color/white"
-        android:layout_height="@dimen/detail_bottom_height">
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="1dp"/>
+        android:layout_height="@dimen/detail_bottom_height"
+        android:layout_gravity="bottom"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="2"/>
+
+            <TextView
+                android:id="@+id/tv_detail_bottom_like"
+                style="@style/bottom_text"
+                android:drawableTop="@mipmap/ic_daily_like"
+                android:text="@string/detail_bottom_like"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:id="@+id/tv_detail_bottom_comment"
+                style="@style/bottom_text"
+                android:drawableTop="@mipmap/ic_daily_comment"
+                android:text="@string/detail_bottom_comment"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="3"/>
+
+            <TextView
+                android:id="@+id/tv_detail_bottom_share"
+                style="@style/bottom_text"
+                android:drawableTop="@mipmap/ic_daily_share"
+                android:text="@string/detail_bottom_share"/>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="2"/>
+        </LinearLayout>
+
         <TextView
-            android:id="@+id/tv_detail_bottom_like"
-            android:text="@string/detail_bottom_like"
-            android:drawableTop="@mipmap/ic_daily_like"
-            style="@style/bottom_text"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="1dp"/>
-        <TextView
-            android:id="@+id/tv_detail_bottom_comment"
-            android:text="@string/detail_bottom_comment"
-            android:drawableTop="@mipmap/ic_daily_comment"
-            style="@style/bottom_text"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="1dp"/>
-        <TextView
-            android:id="@+id/tv_detail_bottom_share"
-            android:text="@string/detail_bottom_share"
-            android:drawableTop="@mipmap/ic_daily_share"
-            style="@style/bottom_text"/>
-        <Space
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="1dp"/>
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="top"
+            android:background="@android:color/darker_gray"/>
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

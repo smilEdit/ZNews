@@ -2,6 +2,7 @@ package com.zzz.myapplication.di.module;
 
 import com.zzz.myapplication.app.App;
 import com.zzz.myapplication.di.ContextLife;
+import com.zzz.myapplication.model.db.RealmHelper;
 import com.zzz.myapplication.model.http.RetrofitHelper;
 
 import javax.inject.Singleton;
@@ -34,5 +35,10 @@ public class AppModule {
         return new RetrofitHelper();
     }
 
+    @Provides
+    @Singleton
+    RealmHelper provideRealmHelper() {
+        return new RealmHelper(mApp);
+    }
 
 }

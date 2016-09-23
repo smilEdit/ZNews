@@ -25,8 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 
 
-
-
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, OnMenuItemClickListener, OnMenuItemLongClickListener {
 
 //
@@ -65,22 +63,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         setToolBar(mToolBar,"知乎");
         fragmentManager = getSupportFragmentManager();
         mZhihuMainFragment = new ZhihuMainFragment();
-
-//        mDrawerToggle = new ActionBarDrawerToggle(this, mDlMain, mToolBar, R.string.drawer_open, R.string.drawer_close);
-//        mDrawerToggle.syncState();
-//        mDlMain.setDrawerListener(mDrawerToggle);
         loadRootFragment(R.id.fl_main_content, mZhihuMainFragment);
-//        mNvMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(MenuItem menuItem) {
-//                ZLog.d(menuItem.getTitle().toString());
-//                menuItem.setChecked(true); // 改变item选中状态
-//                setTitle(menuItem.getTitle()); // 改变页面标题，标明导航状态
-//                currentNavigationId = menuItem.getItemId();
-//                mDlMain.closeDrawers(); // 关闭导航菜单
-//                return true;
-//            }
-//        });
         initMenuFragment();
     }
 
@@ -129,25 +112,31 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         List<MenuObject> menuObjects = new ArrayList<>();
 
         MenuObject close = new MenuObject();
+        close.setDividerColor(R.color.md_deep_purple_600_color_code);
         close.setResource(R.mipmap.close);
 
-        MenuObject zhihu = new MenuObject("知乎");
+        MenuObject zhihu = new MenuObject("zhihu");
+        zhihu.setDividerColor(R.color.md_light_blue_600_color_code);
         zhihu.setResource(R.mipmap.zhihu);
 
-        MenuObject meizhi = new MenuObject("妹纸");
+        MenuObject meizhi = new MenuObject("meizi");
+        meizhi.setDividerColor(R.color.md_yellow_600_color_code);
         meizhi.setResource(R.mipmap.meizhi);
 
-        MenuObject wechat = new MenuObject("微信");
+        MenuObject wechat = new MenuObject("wechat");
+        wechat.setDividerColor(R.color.md_green_600_color_code);
         wechat.setResource(R.mipmap.wechat);
 
-        MenuObject fav = new MenuObject("My Favorite");
+        MenuObject fav = new MenuObject("favorite");
+        fav.setDividerColor(R.color.md_red_600_color_code);
         fav.setResource(R.mipmap.fav);
+
+        MenuObject me = new MenuObject("aboutme");
+        me.setDividerColor(R.color.md_teal_600_color_code);
+        me.setResource(R.mipmap.about);
 
         MenuObject settings = new MenuObject("settings");
         settings.setResource(R.mipmap.setting);
-
-        MenuObject me = new MenuObject("About Me");
-        me.setResource(R.mipmap.about);
 
         menuObjects.add(close);
         menuObjects.add(zhihu);

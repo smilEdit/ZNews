@@ -4,7 +4,6 @@ import android.app.Activity;
 
 import com.zzz.myapplication.di.ActivityScope;
 import com.zzz.myapplication.di.module.ActivityModule;
-import com.zzz.myapplication.model.http.RetrofitHelper;
 import com.zzz.myapplication.ui.main.activity.MainActivity;
 import com.zzz.myapplication.ui.zhihu.activity.WelcomeActivity;
 import com.zzz.myapplication.ui.zhihu.activity.ZhihuDetailActivity;
@@ -20,7 +19,7 @@ import dagger.Component;
 @Component(dependencies = AppComponent.class,modules = ActivityModule.class)
 public interface ActivityComponent {
 
-    RetrofitHelper getRetrofitHelper();
+//    RetrofitHelper getRetrofitHelper();
 
     Activity getActivity();
 

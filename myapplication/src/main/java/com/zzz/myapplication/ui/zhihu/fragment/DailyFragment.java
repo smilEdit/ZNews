@@ -1,5 +1,6 @@
 package com.zzz.myapplication.ui.zhihu.fragment;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,9 +10,11 @@ import android.view.View;
 
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.myapplication.R;
+import com.zzz.myapplication.app.App;
 import com.zzz.myapplication.base.BaseFragment;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
+import com.zzz.myapplication.model.db.RealmHelper;
 import com.zzz.myapplication.presenter.DailyPresenter;
 import com.zzz.myapplication.presenter.contract.DailyContract;
 import com.zzz.myapplication.ui.zhihu.activity.CalendarActivity;
@@ -41,6 +44,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     @BindView(R.id.srl_daily_refresh)
     SwipeRefreshLayout   mSrlDailyRefresh;
 
+    RealmHelper mRealmHelper;
     DailyAdapter mAdapter;
     String       mCurrentDate;
 
@@ -58,15 +62,25 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     protected void initEventAndData() {
+        mRealmHelper = App.getAppComponent().realmHelper();
         mCurrentDate = ZDate.getCurrentDate();
         mAdapter = new DailyAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
+
             @Override
-            public void onItemClick(int id) {
+            public void onItemClick(int position, View view) {
+                mRealmHelper.inserNewsId(mList.get(position).getId());
+                mAdapter.setReadState(position,true);
+                if (mAdapter.getIsBefore()) {
+                    mAdapter.notifyItemChanged(position + 1);
+                } else {
+                    mAdapter.notifyItemChanged(position + 2);
+                }
                 Intent intent = new Intent();
                 intent.setClass(mContext, ZhihuDetailActivity.class);
-                intent.putExtra("id", id);
-                mContext.startActivity(intent);
+                intent.putExtra("id", mList.get(position).getId());
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, view, "shareView");
+                mContext.startActivity(intent,options.toBundle());
             }
         });
         mSrlDailyRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -92,13 +106,16 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     public void showContent(DailyListBean info) {
         mRlDailyLoading.stop();
         mRvDailyList.setVisibility(View.VISIBLE);
+        mList = info.getStories();
         mAdapter.addDailyDate(info);
         mPresenter.startInterval();
     }
 
     @Override
     public void showMoreContent(String date, DailyBeforeListBean info) {
+        mPresenter.startInterval();
         mSrlDailyRefresh.setRefreshing(false);
+        mList = info.getStories();
         mCurrentDate = String.valueOf(Integer.valueOf(info.getDate() + 1));
         mRlDailyLoading.stop();
         mRvDailyList.setVisibility(View.VISIBLE);
