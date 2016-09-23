@@ -28,7 +28,6 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 
-
 /**
  * @创建者 zlf
  * @创建时间 2016/9/20 14:40
@@ -59,6 +58,9 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     private int mId;
     private boolean isBottomShow = true;
 
+    private int allNum = 0;
+    private int shortNum = 0;
+    private int longNum = 0;
 
     @Override
     protected void initEventAndData() {
@@ -113,6 +115,9 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         mLoadingAnmi.stop();
         mTvDetailBottomLike.setText(String.format("%d个赞",detailExtraBean.getPopularity()));
         mTvDetailBottomComment.setText(String.format("%d条评论",detailExtraBean.getComments()));
+        allNum = detailExtraBean.getComments();
+        shortNum = detailExtraBean.getShort_comments();
+        longNum = detailExtraBean.getLong_comments();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -130,7 +135,13 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
                 ZSnack.showSnackShort(mWvDetailCentent,"赞");
                 break;
             case R.id.tv_detail_bottom_comment:
-                ZSnack.showSnackShort(mWvDetailCentent,"评论");
+                Intent intent = getIntent();
+                intent.setClass(this,CommentActivity.class);
+                intent.putExtra("id",mId);
+                intent.putExtra("allNum",allNum);
+                intent.putExtra("shortNum",shortNum);
+                intent.putExtra("longNum",longNum);
+                startActivity(intent);
                 break;
             case R.id.tv_detail_bottom_share:
                 ZSnack.showSnackShort(mWvDetailCentent,"分享");

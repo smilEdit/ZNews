@@ -1,5 +1,6 @@
 package com.zzz.myapplication.model.http;
 
+import com.zzz.myapplication.model.bean.CommentBean;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.bean.DetailExtraBean;
@@ -55,4 +56,15 @@ public interface ZhihuApis {
     @GET("start-image/{res}")
     Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
 
+    /**
+     * 知乎长评论
+     */
+    @GET("story/{id}/long-comments")
+    Observable<CommentBean> getLongCommentInfo(@Path("id") int id);
+
+    /**
+     * 知乎短评论
+     */
+    @GET("story/{id}/short-comments")
+    Observable<CommentBean> getShortCommentInfo(@Path("id") int id);
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.zzz.myapplication.di.FragmentScope;
 import com.zzz.myapplication.di.module.FragmentModule;
+import com.zzz.myapplication.ui.zhihu.fragment.CommentFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.DailyFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.HotFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.SectionFragment;
@@ -34,4 +35,6 @@ public interface FragmentComponent {
     void inject(SectionFragment sectionFragment);
 
     void inject(HotFragment hotFragment);
+
+    void inject(CommentFragment commentFragment);
 }

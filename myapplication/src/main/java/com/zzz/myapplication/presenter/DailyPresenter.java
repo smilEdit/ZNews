@@ -66,14 +66,24 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                         return date.append(year).append(month).append(day).toString();
                     }
                 })
-                .observeOn(Schedulers.io())
+                .observeOn(Schedulers.io())  //访问网络 切IO线程
                 .flatMap(new Func1<String, Observable<DailyBeforeListBean>>() {
                     @Override
                     public Observable<DailyBeforeListBean> call(String date) {
                         return mRetrofitHelper.fetchDailyBeforeListInfo(date);
                     }
                 })
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()) //显示结果 切UI线程（Realm需要在主线程）
+                .map(new Func1<DailyBeforeListBean, DailyBeforeListBean>() {
+                    @Override
+                    public DailyBeforeListBean call(DailyBeforeListBean dailyBeforeListBean) {
+                        List<DailyListBean.StoriesBean> list = dailyBeforeListBean.getStories();
+                        for (DailyListBean.StoriesBean item : list) {
+                            item.setReadState(mRealmHelper.queryNewsId(item.getId()));
+                        }
+                        return dailyBeforeListBean;
+                    }
+                })
                 .subscribe(new Action1<DailyBeforeListBean>() {
                                @Override
                                public void call(DailyBeforeListBean dailyBeforeListBean) {
@@ -89,7 +99,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                             public void call(Throwable throwable) {
                                 registerEvent();
                                 ZLog.i(throwable.toString());
-                                mView.showError("");
+                                mView.showError("数据加载失败");
                             }});
         addSubscrebe(rxSubscription);
     }
@@ -118,7 +128,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                     @Override
                     public void call(Throwable throwable) {
                         ZLog.i(throwable.toString());
-                        mView.showError("");
+                        mView.showError("数据加载失败");
                     }
                 });
         addSubscrebe(rxSubscription);
@@ -139,7 +149,7 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError("");
+                        mView.showError("数据加载失败");
                     }
                 });
         addSubscrebe(rxSubscription);

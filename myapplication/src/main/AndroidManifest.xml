@@ -28,7 +28,7 @@
         <!--zhihu-->
         <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"/>
         <activity android:name=".ui.zhihu.activity.CalendarActivity"/>
-
+        <activity android:name=".ui.zhihu.activity.CommentActivity"/>
         <!--meihzi-->
 
         <!--wechat-->

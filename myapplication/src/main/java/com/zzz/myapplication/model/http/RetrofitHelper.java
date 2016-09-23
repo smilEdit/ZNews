@@ -2,6 +2,7 @@ package com.zzz.myapplication.model.http;
 
 import com.zzz.myapplication.BuildConfig;
 import com.zzz.myapplication.app.Constants;
+import com.zzz.myapplication.model.bean.CommentBean;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.bean.DetailExtraBean;
@@ -125,4 +126,11 @@ public class RetrofitHelper {
         return zhihuApiService.getWelcomeInfo(res);
     }
 
+    public Observable<CommentBean> fetchLongCommentBean(int id) {
+        return zhihuApiService.getLongCommentInfo(id);
+    }
+
+    public Observable<CommentBean> fetchShortCommentBean(int id) {
+        return zhihuApiService.getShortCommentInfo(id);
+    }
 }

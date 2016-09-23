@@ -8,10 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.myapplication.R;
 import com.zzz.myapplication.app.App;
 import com.zzz.myapplication.base.BaseFragment;
+import com.zzz.myapplication.component.RxBus;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.db.RealmHelper;
@@ -91,7 +93,12 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
                 if (mCurrentDate.equals("今日新闻")) {
                     mPresenter.getDailyData();
                 } else {
-                    mPresenter.getBeforeData(mCurrentDate);
+                    int year = Integer.valueOf(mCurrentDate.substring(0,4));
+                    int month = Integer.valueOf(mCurrentDate.substring(4,6));
+                    int day = Integer.valueOf(mCurrentDate.substring(6,8));
+                    CalendarDay date = CalendarDay.from(year, month, day);
+                    RxBus.getDefault().post(date);
+//                    mPresenter.getBeforeData(mCurrentDate);
                 }
             }
         });
