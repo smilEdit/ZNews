@@ -29,6 +29,13 @@ public class CommentBean {
         this.comments = comments;
     }
 
+    @Override
+    public String toString() {
+        return "CommentBean{" +
+                "comments=" + comments +
+                '}';
+    }
+
     public static class CommentsBean {
         @Override
         public String toString() {

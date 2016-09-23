@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="horizontal"
-              android:padding="8dp">
+              android:padding="10dp">
 
     <ImageView
         android:id="@+id/iv_comment_face"
         android:layout_width="@dimen/comment_face_size"
+        android:layout_marginEnd="10dp"
         android:layout_height="@dimen/comment_face_size"/>
 
     <LinearLayout
@@ -23,6 +24,7 @@
             android:textStyle="bold"/>
 
         <TextView
+            android:layout_marginTop="8dp"
             android:id="@+id/tv_comment_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,8 +40,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/tv_comment_time"
@@ -55,6 +57,7 @@
                 android:textColor="@color/md_blue_grey_300_color_code"/>
 
             <TextView
+                android:drawableLeft="@mipmap/ic_daily_like"
                 android:id="@+id/tv_comment_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -62,5 +65,9 @@
                 android:layout_marginEnd="10dp"
                 android:textColor="@color/md_blue_grey_300_color_code"/>
         </RelativeLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/md_white_color_code"/>
     </LinearLayout>
 </LinearLayout>

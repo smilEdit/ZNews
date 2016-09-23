@@ -10,7 +10,6 @@ import com.zzz.myapplication.R;
 import com.zzz.myapplication.base.SimpleActivity;
 import com.zzz.myapplication.ui.zhihu.adapter.CommentMainAdapter;
 import com.zzz.myapplication.ui.zhihu.fragment.CommentFragment;
-import com.zzz.myapplication.util.ZLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,6 @@ public class CommentActivity extends SimpleActivity {
         int id = intent.getExtras().getInt("id");
         intent.getExtras().getInt("shortNum");
         setToolBar(mToolBar, String.format("%d条评论", allNum));
-        ZLog.i(id + "");
         CommentFragment shortCommentFragment = new CommentFragment();
         Bundle shortBundle = new Bundle();
         shortBundle.putInt("id", id);

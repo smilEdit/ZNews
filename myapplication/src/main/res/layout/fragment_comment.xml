@@ -2,11 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
-
+<com.zzz.myapplication.widegt.FunGameRefreshView
+    android:id="@+id/refresh_fun_game"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <ListView
         android:id="@+id/lv_comment_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
+</com.zzz.myapplication.widegt.FunGameRefreshView>
     <include layout="@layout/view_loading_anim"/>
 </FrameLayout>
