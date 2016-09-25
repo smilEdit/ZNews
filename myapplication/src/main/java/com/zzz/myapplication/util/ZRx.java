@@ -1,8 +1,12 @@
 package com.zzz.myapplication.util;
 
+import com.zzz.myapplication.model.http.ApiException;
+import com.zzz.myapplication.model.http.HttpResponse;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -22,6 +26,24 @@ public class ZRx {
             public Observable<T> call(Observable<T> observable) {
                 return observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread());
+            }
+        };
+    }
+
+    public static <T> Observable.Transformer<HttpResponse<T>, T> handleResult() {   //compose判断结果
+        return new Observable.Transformer<HttpResponse<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<HttpResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<HttpResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(HttpResponse<T> tHttpResponse) {
+                        if(!tHttpResponse.getError()) {
+                            return createData(tHttpResponse.getResults());
+                        } else {
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
             }
         };
     }

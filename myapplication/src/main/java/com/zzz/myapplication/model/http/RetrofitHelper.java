@@ -6,6 +6,7 @@ import com.zzz.myapplication.model.bean.CommentBean;
 import com.zzz.myapplication.model.bean.DailyBeforeListBean;
 import com.zzz.myapplication.model.bean.DailyListBean;
 import com.zzz.myapplication.model.bean.DetailExtraBean;
+import com.zzz.myapplication.model.bean.GankItemBean;
 import com.zzz.myapplication.model.bean.ThemeListBean;
 import com.zzz.myapplication.model.bean.WelcomeBean;
 import com.zzz.myapplication.model.bean.ZhihuDetailBean;
@@ -13,6 +14,7 @@ import com.zzz.myapplication.util.ZSystem;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -35,6 +37,7 @@ public class RetrofitHelper {
 
     private static OkHttpClient sOkHttpClient = null;
     private static ZhihuApis zhihuApiService = null;
+    private static GankApis sGankApis = null;
 
     public RetrofitHelper() {
         init();
@@ -43,6 +46,7 @@ public class RetrofitHelper {
     private void init() {
         initOkHttp();
         zhihuApiService = getZhihuApiService();
+        sGankApis = getGankApisService();
     }
 
     private void initOkHttp() {
@@ -133,4 +137,27 @@ public class RetrofitHelper {
     public Observable<CommentBean> fetchShortCommentBean(int id) {
         return zhihuApiService.getShortCommentInfo(id);
     }
+
+    public static GankApis getGankApisService() {
+        Retrofit gankRetrofit = new Retrofit.Builder()
+                .baseUrl(GankApis.HOST)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return gankRetrofit.create(GankApis.class);
+    }
+
+    public Observable<HttpResponse<List<GankItemBean>>> fetchFuliImage(int num) {
+        return sGankApis.getFuliList(num);
+    }
+
+    public Observable<HttpResponse<List<GankItemBean>>> fetchGirlLst(int num,int page) {
+        return sGankApis.getGirlList(num,page);
+    }
+
+    public Observable<HttpResponse<List<GankItemBean>>> fetchTechList(String tech,int num,int page) {
+        return sGankApis.getTechList(tech,num,page);
+    }
+
 }
