@@ -16,6 +16,8 @@ import com.zzz.myapplication.R;
 import com.zzz.myapplication.base.BaseActivity;
 import com.zzz.myapplication.presenter.MainPresenter;
 import com.zzz.myapplication.presenter.contract.MainContract;
+import com.zzz.myapplication.ui.gank.fragment.GankMainFragment;
+import com.zzz.myapplication.ui.main.fragment.AuthorFragment;
 import com.zzz.myapplication.ui.zhihu.fragment.ZhihuMainFragment;
 import com.zzz.myapplication.util.ZToast;
 
@@ -23,30 +25,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.SupportFragment;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, OnMenuItemClickListener, OnMenuItemLongClickListener {
 
-//
-//    @BindView(R.id.fl_main_content)
-//    FrameLayout    mFlMainContent;
-//    @BindView(R.id.nv_main)
-//    NavigationView mNvMain;
-//    @BindView(R.id.dl_main)
-//    DrawerLayout   mDlMain;
+    //
+    //    @BindView(R.id.fl_main_content)
+    //    FrameLayout    mFlMainContent;
+    //    @BindView(R.id.nv_main)
+    //    NavigationView mNvMain;
+    //    @BindView(R.id.dl_main)
+    //    DrawerLayout   mDlMain;
     @BindView(R.id.tb_main)
     Toolbar mToolBar;
 
-//    ActionBarDrawerToggle mDrawerToggle;
+    //    ActionBarDrawerToggle mDrawerToggle;
     ZhihuMainFragment mZhihuMainFragment;
 
     private ContextMenuDialogFragment mMenuDialogFragment;
 
-    private FragmentManager fragmentManager;
+    private static final String ITEM_ZHIHU = "知乎日报";
+    private static final String ITEM_GANK  = "干货集中营";
+    private static final String ITEM_ME = "Me";
 
-    int currentNavigationId = 0;
+    private FragmentManager  fragmentManager;
 
-
+    private GankMainFragment mGankMainFragment;
+    private AuthorFragment mAuthorFragment;
+    private SupportFragment mCurrentFragment;
 
     @Override
     protected void initInject() {
@@ -60,10 +67,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     protected void initEventAndData() {
-        setToolBar(mToolBar,"知乎");
+        setToolBar(mToolBar, ITEM_ZHIHU);
         fragmentManager = getSupportFragmentManager();
         mZhihuMainFragment = new ZhihuMainFragment();
-        loadRootFragment(R.id.fl_main_content, mZhihuMainFragment);
+        mGankMainFragment = new GankMainFragment();
+        mAuthorFragment = new AuthorFragment();
+        mCurrentFragment = mZhihuMainFragment;
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment);
         initMenuFragment();
     }
 
@@ -84,12 +94,37 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void onMenuItemClick(View view, int position) {
-        ZToast.showShortToast(mConext,"onClick"+position);
+        switch (position) {
+            case 1:
+                if (mCurrentFragment == mZhihuMainFragment) {
+                    return;
+                }
+                showHideFragment(mZhihuMainFragment, mCurrentFragment);
+                setToolBar(mToolBar,ITEM_ZHIHU);
+                mCurrentFragment = mZhihuMainFragment;
+                break;
+            case 2:
+                if (mCurrentFragment == mGankMainFragment) {
+                    return;
+                }
+                showHideFragment(mGankMainFragment, mCurrentFragment);
+                setToolBar(mToolBar,ITEM_GANK);
+                mCurrentFragment = mGankMainFragment;
+                break;
+            case 5:
+                if (mCurrentFragment == mAuthorFragment) {
+                    return;
+                }
+                showHideFragment(mAuthorFragment, mCurrentFragment);
+                setToolBar(mToolBar,ITEM_ME);
+                mCurrentFragment = mAuthorFragment;
+                break;
+        }
     }
 
     @Override
     public void onMenuItemLongClick(View view, int position) {
-        ZToast.showShortToast(mConext,"longClick"+position);
+        ZToast.showShortToast(mConext, "longClick" + position);
     }
 
     private List<MenuObject> getMenuObjects() {
@@ -115,27 +150,27 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         close.setDividerColor(R.color.md_deep_purple_600_color_code);
         close.setResource(R.mipmap.close);
 
-        MenuObject zhihu = new MenuObject("zhihu");
+        MenuObject zhihu = new MenuObject("知乎");
         zhihu.setDividerColor(R.color.md_light_blue_600_color_code);
         zhihu.setResource(R.mipmap.zhihu);
 
-        MenuObject meizhi = new MenuObject("meizi");
+        MenuObject meizhi = new MenuObject("妹纸");
         meizhi.setDividerColor(R.color.md_yellow_600_color_code);
         meizhi.setResource(R.mipmap.meizhi);
 
-        MenuObject wechat = new MenuObject("wechat");
+        MenuObject wechat = new MenuObject("微信");
         wechat.setDividerColor(R.color.md_green_600_color_code);
         wechat.setResource(R.mipmap.wechat);
 
-        MenuObject fav = new MenuObject("favorite");
+        MenuObject fav = new MenuObject("收藏");
         fav.setDividerColor(R.color.md_red_600_color_code);
         fav.setResource(R.mipmap.fav);
 
-        MenuObject me = new MenuObject("aboutme");
+        MenuObject me = new MenuObject("作者");
         me.setDividerColor(R.color.md_teal_600_color_code);
         me.setResource(R.mipmap.about);
 
-        MenuObject settings = new MenuObject("settings");
+        MenuObject settings = new MenuObject("设置");
         settings.setResource(R.mipmap.setting);
 
         menuObjects.add(close);
