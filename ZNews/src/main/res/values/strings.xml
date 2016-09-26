@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ZNews</string>
+    <string name="drawer_open">打开</string>
+    <string name="drawer_close">关闭</string>
+    <string name="zhihu">知乎</string>
+    <string name="gank">妹纸</string>
+    <string name="about">关于</string>
+    <string name="detail_bottom_like">点赞</string>
+    <string name="detail_bottom_comment">评论</string>
+    <string name="detail_bottom_share">分享</string>
+    <string name="context_menu">content_menu</string>
+    <string name="action_bar_copy">复制链接到剪贴板</string>
+</resources>

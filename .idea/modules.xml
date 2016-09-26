@@ -4,8 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BaiduMapTest.iml" filepath="$PROJECT_DIR$/BaiduMapTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/EShare.iml" filepath="$PROJECT_DIR$/EShare.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/myapplication/myapplication.iml" filepath="$PROJECT_DIR$/myapplication/myapplication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ZNews/ZNews.iml" filepath="$PROJECT_DIR$/ZNews/ZNews.iml" />
     </modules>
   </component>
 </project>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout
+    android:id="@+id/srl_section_fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<FrameLayout
+    android:layout_width="match_parent"
+    android:background="@color/md_white_color_code"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/rv_section_fragment_content"
+        android:layout_height="match_parent"/>
+
+    <include layout="@layout/view_loading_anim"/>
+</FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
