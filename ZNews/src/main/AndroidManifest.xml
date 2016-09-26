@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.zzz.myapplication">
+          package="com.zzz.news">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -8,13 +8,13 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-        android:name=".app.App"
+        android:name="com.zzz.news.app.App"
         android:allowBackup="true"
         android:icon="@mipmap/z_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.zhihu.activity.WelcomeActivity">
+        <activity android:name="com.zzz.news.ui.zhihu.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -23,12 +23,12 @@
         </activity>
 
         <!--main-->
-        <activity android:name=".ui.main.activity.MainActivity"/>
+        <activity android:name="com.zzz.news.ui.main.activity.MainActivity"/>
 
         <!--zhihu-->
-        <activity android:name=".ui.zhihu.activity.ZhihuDetailActivity"/>
-        <activity android:name=".ui.zhihu.activity.CalendarActivity"/>
-        <activity android:name=".ui.zhihu.activity.CommentActivity"/>
+        <activity android:name="com.zzz.news.ui.zhihu.activity.ZhihuDetailActivity"/>
+        <activity android:name="com.zzz.news.ui.zhihu.activity.CalendarActivity"/>
+        <activity android:name="com.zzz.news.ui.zhihu.activity.CommentActivity"/>
         <!--meihzi-->
 
         <!--wechat-->
