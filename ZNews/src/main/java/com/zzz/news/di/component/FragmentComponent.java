@@ -7,6 +7,7 @@ import com.zzz.news.di.module.FragmentModule;
 import com.zzz.news.ui.gank.fragment.GankMainFragment;
 import com.zzz.news.ui.gank.fragment.GirlFragment;
 import com.zzz.news.ui.gank.fragment.TechFragment;
+import com.zzz.news.ui.main.fragment.MeFragment;
 import com.zzz.news.ui.zhihu.fragment.CommentFragment;
 import com.zzz.news.ui.zhihu.fragment.DailyFragment;
 import com.zzz.news.ui.zhihu.fragment.HotFragment;
@@ -50,4 +51,8 @@ public interface FragmentComponent {
     void inject(TechFragment techFragment);
 
     void inject(GirlFragment girlFragment);
+
+    //main fragment
+
+    void inject(MeFragment meFragment);
 }

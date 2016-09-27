@@ -5,10 +5,10 @@ import com.zzz.news.base.SimpleFramgent;
 
 /**
  * @创建者 zlf
- * @创建时间 2016/9/26 11:32
+ * @创建时间 2016/9/27 17:47
  */
 
-public class AuthorFragment extends SimpleFramgent {
+public class MeFragment extends SimpleFramgent {
     @Override
     protected void initEventAndData() {
 
@@ -16,11 +16,11 @@ public class AuthorFragment extends SimpleFramgent {
 
     @Override
     protected void initInject() {
-
+        getFragmentComponent().inject(this);
     }
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_author;
+        return R.layout.fragment_me;
     }
 }

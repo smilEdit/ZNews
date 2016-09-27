@@ -4,7 +4,6 @@ import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.ThemeListBean;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.ThemeContract;
-import com.zzz.news.util.ZLog;
 import com.zzz.news.util.ZRx;
 
 import javax.inject.Inject;
@@ -36,8 +35,7 @@ public class ThemePresenter extends RxPresenter<ThemeContract.View> implements T
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        mView.showError("");
-                        ZLog.i(throwable.toString());
+                        mView.showError(throwable.toString());
                     }
                 });
     }

@@ -17,7 +17,7 @@ import com.zzz.news.base.BaseActivity;
 import com.zzz.news.presenter.MainPresenter;
 import com.zzz.news.presenter.contract.MainContract;
 import com.zzz.news.ui.gank.fragment.GankMainFragment;
-import com.zzz.news.ui.main.fragment.AuthorFragment;
+import com.zzz.news.ui.main.fragment.MeFragment;
 import com.zzz.news.ui.zhihu.fragment.ZhihuMainFragment;
 import com.zzz.news.util.ZToast;
 
@@ -50,9 +50,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private static final String ITEM_ME = "Me";
 
     private FragmentManager  fragmentManager;
-
+    private MeFragment mMeFragment;
     private GankMainFragment mGankMainFragment;
-    private AuthorFragment mAuthorFragment;
     private SupportFragment mCurrentFragment;
 
     @Override
@@ -72,7 +71,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         fragmentManager = getSupportFragmentManager();
         mZhihuMainFragment = new ZhihuMainFragment();
         mGankMainFragment = new GankMainFragment();
-        mAuthorFragment = new AuthorFragment();
+        mMeFragment = new MeFragment();
         mCurrentFragment = mZhihuMainFragment;
         loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment);
         initMenuFragment();
@@ -113,12 +112,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 mCurrentFragment = mGankMainFragment;
                 break;
             case 5:
-                if (mCurrentFragment == mAuthorFragment) {
+                if (mCurrentFragment == mMeFragment) {
                     return;
                 }
-                showHideFragment(mAuthorFragment, mCurrentFragment);
+                showHideFragment(mMeFragment, mCurrentFragment);
                 setToolBar(mToolBar,ITEM_ME);
-                mCurrentFragment = mAuthorFragment;
+                mCurrentFragment = mMeFragment;
                 break;
         }
     }
