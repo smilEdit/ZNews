@@ -17,7 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/detail_image_height"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle">
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/TextAppearance.ExpandedTitle"
+            app:expandedTitleMarginEnd="10dp">
 
             <FrameLayout
                 android:layout_width="match_parent"

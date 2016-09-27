@@ -31,7 +31,10 @@
         <activity android:name="com.zzz.news.ui.zhihu.activity.CommentActivity"/>
         <activity android:name=".ui.zhihu.activity.ThemeActivity"/>
         <activity android:name=".ui.zhihu.activity.SectionActivity"/>
+
         <!--meihzi-->
+        <activity android:name=".ui.gank.activity.TechDetailActivity"/>
+        <activity android:name=".ui.gank.activity.GirlDetailActivity"/>
 
         <!--wechat-->
 

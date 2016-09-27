@@ -2,12 +2,13 @@ package com.zzz.news.ui.zhihu.fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.news.R;
@@ -45,8 +46,10 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     FloatingActionButton mFabDailyCalender;
     @BindView(R.id.srl_daily_refresh)
     SwipeRefreshLayout   mSrlDailyRefresh;
+/*    @BindView(R.id.fab_daily_menu)
+    FloatingActionButton mFabDailyMenu;*/
 
-    RealmHelper mRealmHelper;
+    RealmHelper  mRealmHelper;
     DailyAdapter mAdapter;
     String       mCurrentDate;
 
@@ -72,7 +75,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
             @Override
             public void onItemClick(int position, View view) {
                 mRealmHelper.inserNewsId(mList.get(position).getId());
-                mAdapter.setReadState(position,true);
+                mAdapter.setReadState(position, true);
                 if (mAdapter.getIsBefore()) {
                     mAdapter.notifyItemChanged(position + 1);
                 } else {
@@ -82,7 +85,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
                 intent.setClass(mContext, ZhihuDetailActivity.class);
                 intent.putExtra("id", mList.get(position).getId());
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, view, "shareView");
-                mContext.startActivity(intent,options.toBundle());
+                mContext.startActivity(intent, options.toBundle());
             }
         });
         mSrlDailyRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -93,18 +96,20 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
                 if (mCurrentDate.equals("今日新闻")) {
                     mPresenter.getDailyData();
                 } else {
-                    int year = Integer.valueOf(mCurrentDate.substring(0,4));
-                    int month = Integer.valueOf(mCurrentDate.substring(4,6));
-                    int day = Integer.valueOf(mCurrentDate.substring(6,8));
+                    int year = Integer.valueOf(mCurrentDate.substring(0, 4));
+                    int month = Integer.valueOf(mCurrentDate.substring(4, 6));
+                    int day = Integer.valueOf(mCurrentDate.substring(6, 8));
                     CalendarDay date = CalendarDay.from(year, month, day);
                     RxBus.getDefault().post(date);
-//                    mPresenter.getBeforeData(mCurrentDate);
+                    //                    mPresenter.getBeforeData(mCurrentDate);
                 }
             }
         });
+        mSrlDailyRefresh.setColorSchemeColors(Color.BLUE);
         mRvDailyList.setLayoutManager(new LinearLayoutManager(mContext));
         mRvDailyList.setAdapter(mAdapter);
         mRvDailyList.setVisibility(View.INVISIBLE);
+        mFabDailyCalender.attachToRecyclerView(mRvDailyList);
         mRlDailyLoading.start();
         mPresenter.getDailyData();
     }
@@ -132,7 +137,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     @Override
     public void showError(String msg) {
         mRlDailyLoading.stop();
-        ZToast.showShortToast(mContext,"数据加载失败");
+        ZToast.showShortToast(mContext, "数据加载失败");
     }
 
     @Override
@@ -147,10 +152,17 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
         mAdapter.changeTopPager(currentCount);
     }
 
+
     @OnClick(R.id.fab_daily_calender)
-    void startCalendar() {
-        Intent intent = new Intent();
-        intent.setClass(mContext, CalendarActivity.class);
-        ZCircularAnim.startActivity(mActivity,intent,mFabDailyCalender,R.color.colorAccent);
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fab_daily_calender:
+                Intent intent = new Intent();
+                intent.setClass(mContext, CalendarActivity.class);
+                ZCircularAnim.startActivity(mActivity, intent, mFabDailyCalender, R.color.colorAccent);
+                break;
+            //            case R.id.fab_daily_menu:
+            //                break;
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.zzz.news.ui.gank.fragment;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +15,7 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.GankItemBean;
 import com.zzz.news.presenter.TechPresenter;
 import com.zzz.news.presenter.contract.TechContract;
+import com.zzz.news.ui.gank.activity.TechDetailActivity;
 import com.zzz.news.ui.gank.adapter.TechAdapter;
 import com.zzz.news.util.ZDate;
 import com.zzz.news.util.ZImageLoader;
@@ -64,7 +67,14 @@ public class TechFragment extends BaseFragment<TechPresenter> implements TechCon
         mAdapter.setOnItemClickListener(new TechAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view) {
-
+                Intent intent = new Intent();
+                intent.setClass(mContext, TechDetailActivity.class);
+                intent.putExtra("url",mList.get(position).getUrl());
+                intent.putExtra("title",mList.get(position).getDesc());
+                intent.putExtra("id",mList.get(position).get_id());
+                intent.putExtra("tech",mTech);
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(mActivity, view, "shareView");
+                mContext.startActivity(intent,options.toBundle());
             }
         });
         mRvTechContent.setOnScrollListener(new RecyclerView.OnScrollListener() {

@@ -43,7 +43,6 @@ public class GirlPresenter extends RxPresenter<GirlContract.View> implements Gir
                 .subscribe(new Action1<List<GankItemBean>>() {
                     @Override
                     public void call(List<GankItemBean> list) {
-                        ZLog.i(list.toString());
                         mView.showContent(list);
                     }
                 }, new Action1<Throwable>() {

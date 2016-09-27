@@ -1,30 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                              xmlns:app="http://schemas.android.com/apk/res-auto"
-                                              android:id="@+id/srl_daily_refresh"
-                                              android:layout_width="match_parent"
-                                              android:layout_height="match_parent">
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/srl_daily_refresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@layout/view_loading_anim"
-                 android:id="@+id/rl_daily_loading"/>
+        <include
+            android:id="@+id/rl_daily_loading"
+            layout="@layout/view_loading_anim"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_daily_list"
-            android:overScrollMode="never"
-            android:scrollbars="none"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <android.support.design.widget.FloatingActionButton
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none"/>
+
+        <com.melnykov.fab.FloatingActionButton
             android:id="@+id/fab_daily_calender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="20dp"
-            app:borderWidth="0dp"
-            android:src="@mipmap/ic_fab_calendar"
+            android:src="@mipmap/button_date"
+            app:borderWidth="0dp"/>
+<!--        <com.github.clans.fab.FloatingActionMenu
+            android:layout_gravity="end|bottom"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_daily_calender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/button_date"/>
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_daily_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/menu"/>
+        </com.github.clans.fab.FloatingActionMenu>-->
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

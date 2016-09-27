@@ -10,4 +10,6 @@
     <string name="detail_bottom_share">分享</string>
     <string name="context_menu">content_menu</string>
     <string name="action_bar_copy">复制链接到剪贴板</string>
+    <string name="share">分享</string>
+    <string name="save">保存</string>
 </resources>

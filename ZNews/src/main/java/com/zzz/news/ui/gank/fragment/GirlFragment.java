@@ -52,7 +52,9 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
     protected void initEventAndData() {
         mList = new ArrayList<>();
         mAdapter = new GirlAdapter(mContext, mList);
-        mRvGirlContent.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS);
+        mRvGirlContent.setLayoutManager(layoutManager);
 
         mRvGirlContent.setAdapter(mAdapter);
         //滑动监听
@@ -84,7 +86,7 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
                 mContext.startActivity(intent,options.toBundle());
             }
         });
-        mLoadingAnmi.start();
+//        mLoadingAnmi.start();
         mPresenter.getGirlData();
     }
 
@@ -99,24 +101,24 @@ public class GirlFragment extends BaseFragment<GirlPresenter> implements GirlCon
         if (mSrlGirlRefresh.isRefreshing()) {
             mSrlGirlRefresh.setRefreshing(false);
         } else {
-            mLoadingAnmi.stop();
+//            mLoadingAnmi.stop();
         }
         mList.clear();
-        mList.addAll(mList);
+        mList.addAll(gankItemBean);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showMoreContent(List<GankItemBean> gankItemBean, int currentPage) {
         isLoadingMore = false;
-        mLoadingAnmi.stop();
+//        mLoadingAnmi.stop();
         mList.addAll(gankItemBean);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void showError(String msg) {
-        mLoadingAnmi.stop();
+//        mLoadingAnmi.stop();
         ZToast.showShortToast(mContext,msg);
     }
 

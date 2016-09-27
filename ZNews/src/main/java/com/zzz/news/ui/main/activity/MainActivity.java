@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected void initEventAndData() {
         setToolBar(mToolBar, ITEM_ZHIHU);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         fragmentManager = getSupportFragmentManager();
         mZhihuMainFragment = new ZhihuMainFragment();
         mGankMainFragment = new GankMainFragment();

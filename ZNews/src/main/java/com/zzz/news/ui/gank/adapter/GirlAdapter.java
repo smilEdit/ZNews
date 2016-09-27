@@ -15,6 +15,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.zzz.news.R;
 import com.zzz.news.app.App;
 import com.zzz.news.model.bean.GankItemBean;
+import com.zzz.news.util.ZLog;
 
 import java.util.List;
 
@@ -35,9 +36,10 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.ViewHolder> {
     List<GankItemBean> mList;
 
     public GirlAdapter(Context context, List<GankItemBean> list) {
+        mInflater = LayoutInflater.from(context);
         this.mContext = context;
         this.mList = list;
-        mInflater = LayoutInflater.from(context);
+        ZLog.i(mList.toString());
     }
 
     @Override
@@ -50,6 +52,7 @@ public class GirlAdapter extends RecyclerView.Adapter<GirlAdapter.ViewHolder> {
         if (mList.get(holder.getAdapterPosition()).getHeight() > 0) {
             ViewGroup.LayoutParams layoutParams = holder.mIvItemGirl.getLayoutParams();
             layoutParams.height = mList.get(holder.getAdapterPosition()).getHeight();
+            ZLog.i(layoutParams.height+"");
         }
         Glide.with(mContext).load(mList.get(position).getUrl()).asBitmap().diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new SimpleTarget<Bitmap>(App.SCREEN_WIDTH / 2, App.SCREEN_WIDTH / 2) {

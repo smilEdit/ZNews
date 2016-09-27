@@ -59,6 +59,6 @@ public class CalendarActivity extends SimpleActivity {
     @OnClick(R.id.tv_calender_enter)
     void chooseDate() {
         RxBus.getDefault().post(mData);
-        finish();
+        onBackPressedSupport();
     }
 }
