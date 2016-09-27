@@ -29,6 +29,8 @@
         <activity android:name="com.zzz.news.ui.zhihu.activity.ZhihuDetailActivity"/>
         <activity android:name="com.zzz.news.ui.zhihu.activity.CalendarActivity"/>
         <activity android:name="com.zzz.news.ui.zhihu.activity.CommentActivity"/>
+        <activity android:name=".ui.zhihu.activity.ThemeActivity"/>
+        <activity android:name=".ui.zhihu.activity.SectionActivity"/>
         <!--meihzi-->
 
         <!--wechat-->

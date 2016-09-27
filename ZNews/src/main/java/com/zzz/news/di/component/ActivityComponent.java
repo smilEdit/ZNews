@@ -5,6 +5,8 @@ import android.app.Activity;
 import com.zzz.news.di.ActivityScope;
 import com.zzz.news.di.module.ActivityModule;
 import com.zzz.news.ui.main.activity.MainActivity;
+import com.zzz.news.ui.zhihu.activity.SectionActivity;
+import com.zzz.news.ui.zhihu.activity.ThemeActivity;
 import com.zzz.news.ui.zhihu.activity.WelcomeActivity;
 import com.zzz.news.ui.zhihu.activity.ZhihuDetailActivity;
 
@@ -28,5 +30,9 @@ public interface ActivityComponent {
     void inject(ZhihuDetailActivity zhihuDetailActivity);
 
     void inject(WelcomeActivity welcomeActivity);
+
+    void inject(ThemeActivity themeActivity);
+
+    void inject(SectionActivity sectionActivity);
 }
 

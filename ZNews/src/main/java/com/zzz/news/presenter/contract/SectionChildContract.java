@@ -15,6 +15,7 @@ public interface SectionChildContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+
         void getSectionChildData(int id);
 
         void intsert2db(int id);

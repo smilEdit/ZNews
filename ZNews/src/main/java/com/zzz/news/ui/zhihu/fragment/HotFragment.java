@@ -1,5 +1,6 @@
 package com.zzz.news.ui.zhihu.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.HotListBean;
 import com.zzz.news.presenter.HotPresenter;
 import com.zzz.news.presenter.contract.HotContract;
+import com.zzz.news.ui.zhihu.activity.ZhihuDetailActivity;
 import com.zzz.news.ui.zhihu.adapter.HotAdapter;
 import com.zzz.news.util.ZToast;
 
@@ -59,7 +61,10 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-
+                Intent intent = new Intent();
+                intent.setClass(mContext, ZhihuDetailActivity.class);
+                intent.putExtra("id", mList.get(position).getNews_id());
+                mContext.startActivity(intent);
             }
 
             @Override
@@ -77,7 +82,7 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
     @Override
     public void showError(String msg) {
         mLoadingAnmi.stop();
-        ZToast.showShortToast(mContext,msg);
+        ZToast.showShortToast(mContext, msg);
     }
 
     @Override

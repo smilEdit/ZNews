@@ -7,6 +7,7 @@ import com.zzz.news.model.bean.DetailExtraBean;
 import com.zzz.news.model.bean.HotListBean;
 import com.zzz.news.model.bean.SectionChildListBean;
 import com.zzz.news.model.bean.SectionListBean;
+import com.zzz.news.model.bean.ThemeChildListBean;
 import com.zzz.news.model.bean.ThemeListBean;
 import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.model.bean.ZhihuDetailBean;
@@ -86,6 +87,12 @@ public interface ZhihuApis {
     /**
      * 专栏详情
      */
-    @GET("sections/{id}")
+    @GET("section/{id}")
     Observable<SectionChildListBean> getSectionChildList(@Path("id")int id);
+
+    /**
+     * 主题详情
+     */
+    @GET("theme/{id}")
+    Observable<ThemeChildListBean> getThemeChildList(@Path("id") int id);
 }

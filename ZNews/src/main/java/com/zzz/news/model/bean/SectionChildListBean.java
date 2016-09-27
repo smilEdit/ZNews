@@ -16,6 +16,16 @@ public class SectionChildListBean {
 
     private int               timestamp;
     private String            name;
+
+    @Override
+    public String toString() {
+        return "SectionChildListBean{" +
+                "timestamp=" + timestamp +
+                ", name='" + name + '\'' +
+                ", stories=" + stories +
+                '}';
+    }
+
     /**
      * display_date : 7 月 24 日
      * title : 饿了 · 单挑生平最恨蔬菜（多图）
@@ -24,6 +34,7 @@ public class SectionChildListBean {
      * multipic : true
      * id : 4887302
      */
+
 
     private List<StoriesBean> stories;
 

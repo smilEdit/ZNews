@@ -10,7 +10,7 @@ import com.zzz.news.BuildConfig;
 public class ZLog {
 
     public static boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "com.zzz.myapplication";
+    private static final String TAG = "com.zzz.news";
 
     public static void e(String tag,Object o) {
         if(isDebug) {
@@ -41,6 +41,12 @@ public class ZLog {
     public static void i(String msg) {
         if(isDebug) {
             Logger.i(msg);
+        }
+    }
+
+    public static void j(String json) {
+        if (isDebug) {
+            Logger.json(json);
         }
     }
 }

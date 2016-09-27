@@ -10,6 +10,7 @@ import com.zzz.news.model.bean.GankItemBean;
 import com.zzz.news.model.bean.HotListBean;
 import com.zzz.news.model.bean.SectionChildListBean;
 import com.zzz.news.model.bean.SectionListBean;
+import com.zzz.news.model.bean.ThemeChildListBean;
 import com.zzz.news.model.bean.ThemeListBean;
 import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.model.bean.ZhihuDetailBean;
@@ -152,6 +153,10 @@ public class RetrofitHelper {
 
     public Observable<SectionChildListBean> fetchSectionChildList(int id) {
         return zhihuApiService.getSectionChildList(id);
+    }
+
+    public Observable<ThemeChildListBean> fetchThemeChildList(int id) {
+        return zhihuApiService.getThemeChildList(id);
     }
 
     //gank数据获取

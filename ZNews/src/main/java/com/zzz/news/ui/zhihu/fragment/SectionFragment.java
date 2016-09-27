@@ -1,15 +1,19 @@
 package com.zzz.news.ui.zhihu.fragment;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.victor.loading.rotate.RotateLoading;
+import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zzz.news.R;
 import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.SectionListBean;
 import com.zzz.news.presenter.SectionPresenter;
 import com.zzz.news.presenter.contract.SectionContract;
+import com.zzz.news.ui.zhihu.activity.SectionActivity;
 import com.zzz.news.ui.zhihu.adapter.SectionAdapter;
 import com.zzz.news.util.ZToast;
 
@@ -49,6 +53,23 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
             @Override
             public void onRefresh() {
                 mPresenter.getSectionData();
+            }
+        });
+        mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+//                ZToast.showShortToast(mContext,mList.get(position).getId()+"");
+//                ZToast.showShortToast(mContext, mList.get(position).getName() + "");
+                Intent intent = new Intent();
+                intent.setClass(mContext, SectionActivity.class);
+                intent.putExtra("id", mList.get(position).getId());
+                intent.putExtra("title", mList.get(position).getName());
+                mContext.startActivity(intent);
+            }
+
+            @Override
+            public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
+                return false;
             }
         });
         mPresenter.getSectionData();

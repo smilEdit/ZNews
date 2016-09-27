@@ -18,14 +18,14 @@ import java.util.List;
 
 public class SectionAdapter extends CommonAdapter<SectionListBean.DataBean> {
 
-    private List<SectionListBean.DataBean> mList;
+//    private List<SectionListBean.DataBean> mList;
 
     private Context mContext;
 
     public SectionAdapter(Context context, int layoutId, List<SectionListBean.DataBean> datas) {
         super(context, layoutId, datas);
         this.mContext = context;
-        this.mList = datas;
+//        this.mList = datas;
     }
 
     @Override
@@ -34,8 +34,11 @@ public class SectionAdapter extends CommonAdapter<SectionListBean.DataBean> {
 //        ViewGroup.LayoutParams lp = holder.ivBg.getLayoutParams();
 //        lp.width = (App.SCREEN_WIDTH - ZSystem.dp2px(mContext,12)) / 2;
 //        lp.height = ZSystem.dp2px(mContext,120);
-        holder.setText(R.id.tv_section_content, mList.get(position).getDescription())
-                .setText(R.id.tv_section_kind, mList.get(position).getName());
-        ZImageLoader.setImg(mContext,mList.get(position).getThumbnail(),(ImageView)holder.getView(R.id.iv_section_content));
+//        holder.setText(R.id.tv_section_content, mList.get(position).getDescription())
+//                .setText(R.id.tv_section_kind, mList.get(position).getName());
+                holder.setText(R.id.tv_section_content, dataBean.getDescription())
+                        .setText(R.id.tv_section_kind, dataBean.getName());
+
+        ZImageLoader.setImg(mContext,dataBean.getThumbnail(),(ImageView)holder.getView(R.id.iv_section_content));
     }
 }

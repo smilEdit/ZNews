@@ -1,5 +1,6 @@
 package com.zzz.news.ui.zhihu.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,8 +11,8 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.ThemeListBean;
 import com.zzz.news.presenter.ThemePresenter;
 import com.zzz.news.presenter.contract.ThemeContract;
+import com.zzz.news.ui.zhihu.activity.ThemeActivity;
 import com.zzz.news.ui.zhihu.adapter.ThemeAdapter;
-import com.zzz.news.util.ZSnack;
 import com.zzz.news.util.ZToast;
 
 import java.util.ArrayList;
@@ -45,7 +46,10 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
         mAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int id) {
-                ZSnack.showSnackShort(mRvThemeContent,id+"");
+                Intent intent = new Intent();
+                intent.setClass(mContext, ThemeActivity.class);
+                intent.putExtra("id", id);
+                mContext.startActivity(intent);
             }
         });
         mRvThemeContent.setLayoutManager(new GridLayoutManager(mContext,2));
