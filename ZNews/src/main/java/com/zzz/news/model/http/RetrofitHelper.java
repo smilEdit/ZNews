@@ -8,10 +8,13 @@ import com.zzz.news.model.bean.DailyListBean;
 import com.zzz.news.model.bean.DetailExtraBean;
 import com.zzz.news.model.bean.GankItemBean;
 import com.zzz.news.model.bean.HotListBean;
+import com.zzz.news.model.bean.JokeBean;
 import com.zzz.news.model.bean.SectionChildListBean;
 import com.zzz.news.model.bean.SectionListBean;
 import com.zzz.news.model.bean.ThemeChildListBean;
 import com.zzz.news.model.bean.ThemeListBean;
+import com.zzz.news.model.bean.TopNewsBean;
+import com.zzz.news.model.bean.WeixinBean;
 import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.model.bean.ZhihuDetailBean;
 import com.zzz.news.util.ZSystem;
@@ -39,9 +42,11 @@ import rx.Observable;
  */
 public class RetrofitHelper {
 
-    private static OkHttpClient sOkHttpClient = null;
-    private static ZhihuApis zhihuApiService = null;
-    private static GankApis sGankApis = null;
+    private static OkHttpClient sOkHttpClient   = null;
+    private static ZhihuApis    zhihuApiService = null;
+    private static GankApis     sGankApis       = null;
+    private static JuHeApis     sJuHeApis       = null;
+    private static JuHeApis     sJuheApis       = null;
 
     public RetrofitHelper() {
         init();
@@ -51,6 +56,8 @@ public class RetrofitHelper {
         initOkHttp();
         zhihuApiService = getZhihuApiService();
         sGankApis = getGankApisService();
+        sJuHeApis = getJuHeApisService();
+        sJuheApis = getJuHeJokeApisService();
     }
 
     private void initOkHttp() {
@@ -174,12 +181,47 @@ public class RetrofitHelper {
         return sGankApis.getFuliList(num);
     }
 
-    public Observable<HttpResponse<List<GankItemBean>>> fetchGirlList(int num,int page) {
-        return sGankApis.getGirlList(num,page);
+    public Observable<HttpResponse<List<GankItemBean>>> fetchGirlList(int num, int page) {
+        return sGankApis.getGirlList(num, page);
     }
 
-    public Observable<HttpResponse<List<GankItemBean>>> fetchTechList(String tech,int num,int page) {
-        return sGankApis.getTechList(tech,num,page);
+    public Observable<HttpResponse<List<GankItemBean>>> fetchTechList(String tech, int num, int page) {
+        return sGankApis.getTechList(tech, num, page);
     }
 
+    //集合数据获取
+    public static JuHeApis getJuHeApisService() {
+        Retrofit juheRetrofit = new Retrofit.Builder()
+                .baseUrl(JuHeApis.HOST)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return juheRetrofit.create(JuHeApis.class);
+    }
+
+    public Observable<JuheHttpResponse<TopNewsBean.ResultBean>> fetchTopNewsList() {
+        return sJuHeApis.getTopNewsList();
+    }
+
+    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList() {
+        return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY);
+    }
+
+    //坑爹聚合 数据
+    public static JuHeApis getJuHeJokeApisService() {
+        Retrofit juheRetrofit = new Retrofit.Builder()
+                .baseUrl(JuHeApis.HOST_JOKE)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return juheRetrofit.create(JuHeApis.class);
+    }
+
+    //getJokeList(@Query("key")String key,@Query("page")int page,
+    //@Query("pagesize") int pagesize, @Query("sort") String sort, @Query("time") String time);
+    public Observable<JuheHttpResponse<JokeBean.ResultBean>> fetchJokeBean(int page, int pagesize, String sort, String time) {
+        return sJuheApis.getJokeList(Constants.JUHE_JOKE_KEY, page, pagesize, sort, time);
+    }
 }

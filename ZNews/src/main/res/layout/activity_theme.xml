@@ -23,6 +23,8 @@
             </android.support.v7.widget.RecyclerView>
 
             <include layout="@layout/view_loading_anim"/>
+
+            <include layout="@layout/floating_back"/>
         </FrameLayout>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

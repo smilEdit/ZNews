@@ -1,6 +1,7 @@
 package com.zzz.news.ui.zhihu.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,9 +56,10 @@ public class HotFragment extends BaseFragment<HotPresenter> implements HotContra
         mSrlHotRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
+                mPresenter.getHotData();
             }
         });
+        mSrlHotRefresh.setColorSchemeColors(Color.BLUE);
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {

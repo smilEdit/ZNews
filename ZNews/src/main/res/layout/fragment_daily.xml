@@ -21,28 +21,21 @@
             android:overScrollMode="never"
             android:scrollbars="none"/>
 
-        <com.melnykov.fab.FloatingActionButton
-            android:id="@+id/fab_daily_calender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="20dp"
-            android:src="@mipmap/button_date"
-            app:borderWidth="0dp"/>
-<!--        <com.github.clans.fab.FloatingActionMenu
-            android:layout_gravity="end|bottom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab_daily_calender"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/button_date"/>
-            <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/fab_daily_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/menu"/>
-        </com.github.clans.fab.FloatingActionMenu>-->
+        <include layout="@layout/floating_date"/>
+        <!--        <com.github.clans.fab.FloatingActionMenu
+                    android:layout_gravity="end|bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/fab_daily_calender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/button_date"/>
+                    <com.github.clans.fab.FloatingActionButton
+                        android:id="@+id/fab_daily_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/menu"/>
+                </com.github.clans.fab.FloatingActionMenu>-->
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

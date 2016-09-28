@@ -33,8 +33,10 @@ public class Constants {
 
     //================= KEY ====================
 
-//    public static final String KEY_API = "f95283476506aa756559dd28a56f0c0b"; //需要APIKEY请去 http://apistore.baidu.com/ 申请,复用会减少访问可用次数
-    public static final String KEY_API = "52b7ec3471ac3bec6846577e79f20e4c"; //需要APIKEY请去 http://www.tianapi.com/#wxnew 申请,复用会减少访问可用次数
+    public static final String JUHE_JOKE_KEY = "189df93e385f308c4ca8c71c4bc7fbae";
+    public static final String JUHE_NEWS_KEY = "bd8e0a7114136f806abe023bfd16d4d6";
+    public static final String JUHE_ROBOT_KEY = "647657f24cb2146d82a0663404bc0d16";
+    public static final String JUHE_WEIXIN_KEY = "4d1699d5395753d462ed71a96d1aea8c";
 
     //================= PATH ====================
 

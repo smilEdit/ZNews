@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.melnykov.fab.FloatingActionButton
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fab_daily_calender"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="end|bottom"
+    android:layout_margin="20dp"
+    android:src="@mipmap/button_date"
+    app:borderWidth="0dp"
+    tools:showIn="@layout/fragment_daily"/>

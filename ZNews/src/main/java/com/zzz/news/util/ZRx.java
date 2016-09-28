@@ -2,6 +2,7 @@ package com.zzz.news.util;
 
 import com.zzz.news.model.http.ApiException;
 import com.zzz.news.model.http.HttpResponse;
+import com.zzz.news.model.http.JuheHttpResponse;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -50,51 +51,25 @@ public class ZRx {
         };
     }
 
-//    /**
-//     * 统一返回结果处理
-//     * @param <T>
-//     * @return
-//     */
-//    public static <T> Observable.Transformer<GankHttpResponse<T>, T> handleResult() {   //compose判断结果
-//        return new Observable.Transformer<GankHttpResponse<T>, T>() {
-//            @Override
-//            public Observable<T> call(Observable<GankHttpResponse<T>> httpResponseObservable) {
-//                return httpResponseObservable.flatMap(new Func1<GankHttpResponse<T>, Observable<T>>() {
-//                    @Override
-//                    public Observable<T> call(GankHttpResponse<T> tGankHttpResponse) {
-//                        if(!tGankHttpResponse.getError()) {
-//                            return createData(tGankHttpResponse.getResults());
-//                        } else {
-//                            return Observable.error(new ApiException("服务器返回error"));
-//                        }
-//                    }
-//                });
-//            }
-//        };
-//    }
-//
-//    /**
-//     * 统一返回结果处理
-//     * @param <T>
-//     * @return
-//     */
-//    public static <T> Observable.Transformer<WXHttpResponse<T>, T> handleWXResult() {   //compose判断结果
-//        return new Observable.Transformer<WXHttpResponse<T>, T>() {
-//            @Override
-//            public Observable<T> call(Observable<WXHttpResponse<T>> httpResponseObservable) {
-//                return httpResponseObservable.flatMap(new Func1<WXHttpResponse<T>, Observable<T>>() {
-//                    @Override
-//                    public Observable<T> call(WXHttpResponse<T> tWXHttpResponse) {
-//                        if(tWXHttpResponse.getCode() == 200) {
-//                            return createData(tWXHttpResponse.getNewslist());
-//                        } else {
-//                            return Observable.error(new ApiException("服务器返回error"));
-//                        }
-//                    }
-//                });
-//            }
-//        };
-//    }
+    public static <T> Observable.Transformer<JuheHttpResponse<T>, T> handleJhResult() {   //compose判断结果
+        return new Observable.Transformer<JuheHttpResponse<T>, T>() {
+            @Override
+            public Observable<T> call(Observable<JuheHttpResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<JuheHttpResponse<T>, Observable<T>>() {
+                    @Override
+                    public Observable<T> call(JuheHttpResponse<T> tHttpResponse) {
+                        if(tHttpResponse.getError_code()==0) {
+                            ZLog.e("Transformer");
+                            return createData(tHttpResponse.getResult());
+                        } else {
+                            ZLog.e("ApiException");
+                            return Observable.error(new ApiException("服务器返回error"));
+                        }
+                    }
+                });
+            }
+        };
+    }
 
     /**
      * 生成Observable

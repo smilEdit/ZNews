@@ -1,6 +1,7 @@
 package com.zzz.news.ui.zhihu.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,6 +56,7 @@ public class SectionFragment extends BaseFragment<SectionPresenter> implements S
                 mPresenter.getSectionData();
             }
         });
+        mSrlSectionFragment.setColorSchemeColors(Color.BLUE);
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {

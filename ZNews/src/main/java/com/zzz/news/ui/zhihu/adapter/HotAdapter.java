@@ -8,7 +8,6 @@ import com.zhy.adapter.recyclerview.base.ViewHolder;
 import com.zzz.news.R;
 import com.zzz.news.model.bean.HotListBean;
 import com.zzz.news.util.ZImageLoader;
-import com.zzz.news.util.ZLog;
 
 import java.util.List;
 
@@ -37,6 +36,5 @@ public class HotAdapter extends CommonAdapter<HotListBean.RecentBean> {
             holder.setTextColor(R.id.tv_daily_item_title, R.color.black_bg);
         }
         ZImageLoader.setImg(mContext,mList.get(position).getThumbnail(),(ImageView)holder.getView(R.id.iv_daily_item_image));
-        ZLog.i(mList.get(position).getUrl());
     }
 }

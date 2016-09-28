@@ -17,6 +17,7 @@ import com.zzz.news.base.BaseActivity;
 import com.zzz.news.presenter.MainPresenter;
 import com.zzz.news.presenter.contract.MainContract;
 import com.zzz.news.ui.gank.fragment.GankMainFragment;
+import com.zzz.news.ui.juhe.fragment.JuHeMainFragment;
 import com.zzz.news.ui.main.fragment.MeFragment;
 import com.zzz.news.ui.zhihu.fragment.ZhihuMainFragment;
 import com.zzz.news.util.ZToast;
@@ -48,10 +49,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private static final String ITEM_ZHIHU = "知乎日报";
     private static final String ITEM_GANK  = "干货集中营";
     private static final String ITEM_ME = "Me";
+    public static final String ITEM_JUHE = "聚合数据";
 
     private FragmentManager  fragmentManager;
     private MeFragment mMeFragment;
     private GankMainFragment mGankMainFragment;
+    private JuHeMainFragment mJuHeMainFragment;
     private SupportFragment mCurrentFragment;
 
     @Override
@@ -72,8 +75,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mZhihuMainFragment = new ZhihuMainFragment();
         mGankMainFragment = new GankMainFragment();
         mMeFragment = new MeFragment();
+        mJuHeMainFragment = new JuHeMainFragment();
         mCurrentFragment = mZhihuMainFragment;
-        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment,mMeFragment,mJuHeMainFragment);
         initMenuFragment();
     }
 
@@ -110,6 +114,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 showHideFragment(mGankMainFragment, mCurrentFragment);
                 setToolBar(mToolBar,ITEM_GANK);
                 mCurrentFragment = mGankMainFragment;
+                break;
+            case 3:
+                if (mCurrentFragment == mJuHeMainFragment) {
+                    return;
+                }
+                showHideFragment(mJuHeMainFragment, mCurrentFragment);
+                setToolBar(mToolBar,ITEM_JUHE);
+                mCurrentFragment = mJuHeMainFragment;
                 break;
             case 5:
                 if (mCurrentFragment == mMeFragment) {
@@ -158,9 +170,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         meizhi.setDividerColor(R.color.md_yellow_600_color_code);
         meizhi.setResource(R.mipmap.meizhi);
 
-        MenuObject wechat = new MenuObject("微信");
+        MenuObject wechat = new MenuObject("聚合");
         wechat.setDividerColor(R.color.md_green_600_color_code);
-        wechat.setResource(R.mipmap.wechat);
+        wechat.setResource(R.mipmap.juhe);
 
         MenuObject fav = new MenuObject("收藏");
         fav.setDividerColor(R.color.md_red_600_color_code);

@@ -83,7 +83,11 @@
 
             <include layout="@layout/view_loading_anim"/>
         </FrameLayout>
+
+
     </android.support.v4.widget.NestedScrollView>
+
+    <include layout="@layout/floating_back"/>
 
     <FrameLayout
         android:id="@+id/ll_detail_bottom"

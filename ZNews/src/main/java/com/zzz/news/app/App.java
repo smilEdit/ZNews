@@ -8,7 +8,6 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.orhanobut.logger.Logger;
-import com.squareup.leakcanary.LeakCanary;
 import com.zzz.news.component.CrashHandler;
 import com.zzz.news.di.component.AppComponent;
 import com.zzz.news.di.component.DaggerAppComponent;
@@ -50,7 +49,7 @@ public class App extends Application {
         CrashHandler.init(new CrashHandler(getApplicationContext()));
 
         //初始化内存泄漏检测
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
 
         //初始化过度绘制检测
         //        BlockCanary.install(this, new AppBlockCanaryContext()).start();

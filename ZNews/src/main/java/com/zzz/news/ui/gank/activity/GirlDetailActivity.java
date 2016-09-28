@@ -26,16 +26,19 @@ public class GirlDetailActivity extends SimpleActivity {
     @BindView(R.id.pv_girl_detail)
     PhotoView mPvGirlDetail;
     private String mUrl;
+    //    private ExplosionField mExplosionField;
+
 
     @Override
     protected void initEventAndData() {
-        setToolBar(mToolBar,"妹纸");
+        setToolBar(mToolBar, "妹纸");
+        //        mExplosionField = new ExplosionField(mContext);
         Intent intent = getIntent();
         mUrl = intent.getExtras().getString("url");
         if (mUrl != null) {
-            ZImageLoader.setImg(mContext, mUrl,mPvGirlDetail);
+            ZImageLoader.setImg(mContext, mUrl, mPvGirlDetail);
         }
-//        intent.getExtras().getString("id");
+        //        intent.getExtras().getString("id");
     }
 
     @Override
@@ -45,7 +48,7 @@ public class GirlDetailActivity extends SimpleActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.girl_menu,menu);
+        getMenuInflater().inflate(R.menu.girl_menu, menu);
         return true;
     }
 
@@ -55,11 +58,12 @@ public class GirlDetailActivity extends SimpleActivity {
         switch (id) {
             case R.id.menu_action_save:
 
-                ZSnack.showSnackShort(mPvGirlDetail,"保存");
+                ZSnack.showSnackShort(mPvGirlDetail, "保存");
+                //                mExplosionField.explode(mPvGirlDetail);
                 break;
             case R.id.menu_action_share:
-//                ZShare.shareImage(mContext, ZSystem.saveBitmapToFile(mContext,mUrl,new Bitmap(),),"妹纸");
-                ZShare.shareText(mContext,mUrl,"妹纸");
+                //                ZShare.shareImage(mContext, ZSystem.saveBitmapToFile(mContext,mUrl,new Bitmap(),),"妹纸");
+                ZShare.shareText(mContext, mUrl, "妹纸");
                 break;
         }
         return super.onOptionsItemSelected(item);

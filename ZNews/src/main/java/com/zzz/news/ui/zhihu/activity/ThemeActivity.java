@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zzz.news.R;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @创建者 zlf
@@ -37,6 +39,8 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
     RotateLoading      mLoadingAnmi;
     @BindView(R.id.srl_theme_refresh)
     SwipeRefreshLayout mSrlThemeRefresh;
+    @BindView(R.id.fab_detail)
+    FloatingActionButton mFloatingActionButton;
 
     List<ThemeChildListBean.StoriesBean> mList;
     private ThemeChildAdapter mAdapter;
@@ -79,6 +83,7 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
                 mPresenter.getThemeChildData(mId);
             }
         });
+        mFloatingActionButton.attachToRecyclerView(mRvThemeContent);
     }
 
     @Override
@@ -113,5 +118,19 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
             mLoadingAnmi.stop();
         }
         ZToast.showShortToast(mConext,msg);
+    }
+
+    @OnClick(R.id.fab_detail)
+    public void onClick() {
+        onBackPressedSupport();
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            finishAfterTransition();
+        }
     }
 }

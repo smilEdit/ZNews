@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.news.R;
 import com.zzz.news.base.BaseActivity;
@@ -19,6 +20,7 @@ import com.zzz.news.presenter.ZhihuDetailPresenter;
 import com.zzz.news.presenter.contract.ZhihuDetailContract;
 import com.zzz.news.util.ZHtml;
 import com.zzz.news.util.ZImageLoader;
+import com.zzz.news.util.ZShare;
 import com.zzz.news.util.ZSnack;
 import com.zzz.news.util.ZToast;
 
@@ -42,25 +44,30 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @BindView(R.id.ctl_detail_title)
     CollapsingToolbarLayout mCtlDetailTitle;
     @BindView(R.id.wv_detail_centent)
-    WebView          mWvDetailCentent;
+    WebView                 mWvDetailCentent;
     @BindView(R.id.loading_anmi)
-    RotateLoading    mLoadingAnmi;
+    RotateLoading           mLoadingAnmi;
     @BindView(R.id.nsv_detail_content)
-    NestedScrollView mNsvDetailContent;
+    NestedScrollView        mNsvDetailContent;
     @BindView(R.id.tv_detail_bottom_like)
-    TextView         mTvDetailBottomLike;
+    TextView                mTvDetailBottomLike;
     @BindView(R.id.tv_detail_bottom_comment)
-    TextView         mTvDetailBottomComment;
+    TextView                mTvDetailBottomComment;
     @BindView(R.id.tv_detail_bottom_share)
-    TextView         mTvDetailBottomShare;
+    TextView                mTvDetailBottomShare;
     @BindView(R.id.ll_detail_bottom)
-    FrameLayout      mLlDetailBottom;
+    FrameLayout             mLlDetailBottom;
+    @BindView(R.id.fab_detail)
+    FloatingActionButton mFabDetail;
+
     private int mId;
     private boolean isBottomShow = true;
 
-    private int allNum = 0;
+    private int allNum   = 0;
     private int shortNum = 0;
-    private int longNum = 0;
+    private int longNum  = 0;
+    private String mShareUrl;
+    private int    mZan;
 
     @Override
     protected void initEventAndData() {
@@ -69,7 +76,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         mPresenter.getDetailData(mId);
         mPresenter.getExtraData(mId);
         mLoadingAnmi.start();
-        mWvDetailCentent.setWebViewClient(new WebViewClient(){
+        mWvDetailCentent.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
@@ -79,15 +86,19 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         mNsvDetailContent.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                if(scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
+                if (scrollY - oldScrollY > 0 && isBottomShow) {  //下移隐藏
                     isBottomShow = false;
                     mLlDetailBottom.animate().translationY(mLlDetailBottom.getHeight());
-                } else if(scrollY - oldScrollY < 0 && !isBottomShow){    //上移出现
+                    mFabDetail.hide(true);
+                } else if (scrollY - oldScrollY < 0 && !isBottomShow) {    //上移出现
                     isBottomShow = true;
                     mLlDetailBottom.animate().translationY(0);
+                    mFabDetail.show(true);
                 }
             }
         });
+
+//        mFabDetail.attachToListView();
     }
 
     @Override
@@ -103,18 +114,20 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @Override
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
         mLoadingAnmi.stop();
-        ZImageLoader.setImg(mConext,zhihuDetailBean.getImage(),mIvDetailBar);
+        mShareUrl = zhihuDetailBean.getShare_url();
+        ZImageLoader.setImg(mConext, zhihuDetailBean.getImage(), mIvDetailBar);
         mTvDetailBar.setText(zhihuDetailBean.getImage_source());
         mCtlDetailTitle.setTitle(zhihuDetailBean.getTitle());
         String htmlData = ZHtml.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
-        mWvDetailCentent.loadData(htmlData,ZHtml.MIME_TYPE,ZHtml.ENCODING);
+        mWvDetailCentent.loadData(htmlData, ZHtml.MIME_TYPE, ZHtml.ENCODING);
     }
 
     @Override
     public void showExtraInfo(DetailExtraBean detailExtraBean) {
         mLoadingAnmi.stop();
-        mTvDetailBottomLike.setText(String.format("%d个赞",detailExtraBean.getPopularity()));
-        mTvDetailBottomComment.setText(String.format("%d条评论",detailExtraBean.getComments()));
+        mTvDetailBottomLike.setText(String.format("%d个赞", detailExtraBean.getPopularity()));
+        mZan = detailExtraBean.getPopularity();
+        mTvDetailBottomComment.setText(String.format("%d条评论", detailExtraBean.getComments()));
         allNum = detailExtraBean.getComments();
         shortNum = detailExtraBean.getShort_comments();
         longNum = detailExtraBean.getLong_comments();
@@ -128,23 +141,33 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
         return super.onKeyDown(keyCode, event);
     }
 
-    @OnClick({R.id.tv_detail_bottom_like, R.id.tv_detail_bottom_comment, R.id.tv_detail_bottom_share})
+    private int i = 0;
+
+    @OnClick({R.id.tv_detail_bottom_like, R.id.tv_detail_bottom_comment, R.id.tv_detail_bottom_share,R.id.fab_detail})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_detail_bottom_like:
-                ZSnack.showSnackShort(mWvDetailCentent,"赞");
+                i++;
+                if (i < 10) {
+                    mTvDetailBottomLike.setText(String.format("%d个赞", mZan++));
+                } else {
+                    ZSnack.showSnackShort(mWvDetailCentent, "过分了哦");
+                }
                 break;
             case R.id.tv_detail_bottom_comment:
                 Intent intent = getIntent();
-                intent.setClass(this,CommentActivity.class);
-                intent.putExtra("id",mId);
-                intent.putExtra("allNum",allNum);
-                intent.putExtra("shortNum",shortNum);
-                intent.putExtra("longNum",longNum);
+                intent.setClass(this, CommentActivity.class);
+                intent.putExtra("id", mId);
+                intent.putExtra("allNum", allNum);
+                intent.putExtra("shortNum", shortNum);
+                intent.putExtra("longNum", longNum);
                 startActivity(intent);
                 break;
             case R.id.tv_detail_bottom_share:
-                ZSnack.showSnackShort(mWvDetailCentent,"分享");
+                ZShare.shareText(mConext, mShareUrl, "给你看好");
+                break;
+            case R.id.fab_detail:
+                onBackPressedSupport();
                 break;
         }
     }
@@ -152,6 +175,15 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @Override
     public void showError(String msg) {
         mLoadingAnmi.stop();
-        ZToast.showLongToast(mConext,"获取数据失败");
+        ZToast.showLongToast(mConext, msg);
+    }
+
+    @Override
+    public void onBackPressedSupport() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            finishAfterTransition();
+        }
     }
 }
