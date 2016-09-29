@@ -4,7 +4,6 @@ import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.CommentBean;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.CommentContract;
-import com.zzz.news.util.ZLog;
 import com.zzz.news.util.ZRx;
 
 import javax.inject.Inject;
@@ -38,7 +37,6 @@ public class CommentPresenter extends RxPresenter<CommentContract.View> implemen
                         @Override
                         public void call(CommentBean commentBean) {
                             mView.showContent(commentBean);
-                            ZLog.i(commentBean.toString());
                         }
                     }, new Action1<Throwable>() {
                         @Override

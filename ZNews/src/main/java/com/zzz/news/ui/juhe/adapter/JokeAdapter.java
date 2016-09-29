@@ -21,6 +21,6 @@ public class JokeAdapter extends CommonAdapter<JokeBean.ResultBean.DataBean> {
 
     @Override
     protected void convert(ViewHolder holder, JokeBean.ResultBean.DataBean jokeBean, int position) {
-        holder.setText(R.id.tv_joke, jokeBean.getContent());
+        holder.setText(R.id.tv_joke, jokeBean.getContent().replaceAll(" ", ""));
     }
 }

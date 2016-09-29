@@ -204,8 +204,8 @@ public class RetrofitHelper {
         return sJuHeApis.getTopNewsList();
     }
 
-    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList() {
-        return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY);
+    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList(int ps,int pno) {
+        return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY,ps,pno);
     }
 
     //坑爹聚合 数据

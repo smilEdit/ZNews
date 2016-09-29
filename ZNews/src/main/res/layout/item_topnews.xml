@@ -18,8 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textColor="@color/black_bg"
-            android:text="tiletitleitleitle"/>
+            android:textColor="@color/black_bg"/>
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -32,8 +31,7 @@
                 android:textColor="@color/md_grey_600_color_code"
                 android:id="@+id/tv_topnews_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="shijian"/>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:textSize="10sp"
@@ -41,8 +39,7 @@
                 android:id="@+id/tv_topnews_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="zuozhe"/>
+                android:layout_marginLeft="20dp"/>
         </LinearLayout>
     </LinearLayout>
 

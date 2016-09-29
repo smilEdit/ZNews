@@ -12,4 +12,6 @@
         android:layout_height="match_parent"/>
 </com.zzz.news.widegt.FunGameRefreshView>
     <include layout="@layout/view_loading_anim"/>
+
+    <include layout="@layout/floating_back"/>
 </FrameLayout>

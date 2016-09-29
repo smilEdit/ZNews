@@ -6,12 +6,14 @@ import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.news.R;
 import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.CommentBean;
 import com.zzz.news.presenter.CommentPresenter;
 import com.zzz.news.presenter.contract.CommentContract;
+import com.zzz.news.ui.zhihu.activity.CommentActivity;
 import com.zzz.news.ui.zhihu.adapter.CommentAdapter;
 import com.zzz.news.util.ZSnack;
 import com.zzz.news.widegt.FunGameRefreshView;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @创建者 zlf
@@ -28,11 +31,13 @@ import butterknife.BindView;
 
 public class CommentFragment extends BaseFragment<CommentPresenter> implements CommentContract.View {
     @BindView(R.id.lv_comment_content)
-    ListView           mLvCommentContent;
+    ListView             mLvCommentContent;
     @BindView(R.id.loading_anmi)
-    RotateLoading      mLoadingAnmi;
+    RotateLoading        mLoadingAnmi;
     @BindView(R.id.refresh_fun_game)
-    FunGameRefreshView mFunGameRefreshView;
+    FunGameRefreshView   mFunGameRefreshView;
+    @BindView(R.id.fab_detail)
+    FloatingActionButton mFabDetail;
 
     List<CommentBean.CommentsBean> mList;
     private CommentAdapter mAdapter;
@@ -62,6 +67,7 @@ public class CommentFragment extends BaseFragment<CommentPresenter> implements C
                 mHandler.sendEmptyMessage(0);
             }
         });
+        mFabDetail.attachToListView(mLvCommentContent);
     }
 
     private Handler mHandler = new Handler() {
@@ -89,5 +95,16 @@ public class CommentFragment extends BaseFragment<CommentPresenter> implements C
     public void showError(String msg) {
         mLoadingAnmi.stop();
         mLvCommentContent.setVisibility(View.INVISIBLE);
+    }
+
+    @OnClick({R.id.fab_detail})
+    public void onClick(View view) {
+        onBackPressedSupport();
+    }
+
+    @Override
+    public boolean onBackPressedSupport() {
+        ((CommentActivity) getActivity()).toBack();
+        return false;
     }
 }

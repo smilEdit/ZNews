@@ -5,6 +5,7 @@ import com.zzz.news.model.bean.WeixinBean;
 import com.zzz.news.model.http.JuheHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.WeixinContract;
+import com.zzz.news.util.ZLog;
 import com.zzz.news.util.ZRx;
 
 import javax.inject.Inject;
@@ -21,6 +22,9 @@ public class WeixinPresenter extends RxPresenter<WeixinContract.View> implements
 
     private RetrofitHelper mRetrofitHelper;
 
+    private int ps = 20;
+    private int pno = 1;
+
     @Inject
     public WeixinPresenter(RetrofitHelper retrofitHelper) {
         this.mRetrofitHelper = retrofitHelper;
@@ -28,13 +32,54 @@ public class WeixinPresenter extends RxPresenter<WeixinContract.View> implements
 
     @Override
     public void getWeixinData() {
-        Subscription rxSubscription = mRetrofitHelper.fetchWeixinList()
+        pno = 1;
+        Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,pno)
                 .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<WeixinBean.ResultBean>() {
                     @Override
                     public void call(WeixinBean.ResultBean resultBean) {
                         mView.showContent(resultBean.getList());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError(throwable.toString());
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void getMoreData() {
+        ps = ps + 20;
+        ZLog.i(pno+"");
+        Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,pno)
+                .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
+                .subscribe(new Action1<WeixinBean.ResultBean>() {
+                    @Override
+                    public void call(WeixinBean.ResultBean resultBean) {
+                        mView.showMoreContent(resultBean.getList());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        mView.showError(throwable.toString());
+                    }
+                });
+        addSubscrebe(rxSubscription);
+    }
+
+    @Override
+    public void getNewContent() {
+        Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,++pno)
+                .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
+                .subscribe(new Action1<WeixinBean.ResultBean>() {
+                    @Override
+                    public void call(WeixinBean.ResultBean resultBean) {
+                        mView.showNewContent(resultBean.getList());
                     }
                 }, new Action1<Throwable>() {
                     @Override

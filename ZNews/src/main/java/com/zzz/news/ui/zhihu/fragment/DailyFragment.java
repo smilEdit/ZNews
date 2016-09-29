@@ -159,7 +159,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
             case R.id.fab_daily_calender:
                 Intent intent = new Intent();
                 intent.setClass(mContext, CalendarActivity.class);
-                ZCircularAnim.startActivity(mActivity, intent, mFabDailyCalender, R.color.colorAccent);
+                ZCircularAnim.startActivity(mActivity, intent, mFabDailyCalender, R.color.colorPrimary);
                 break;
             //            case R.id.fab_daily_menu:
             //                break;

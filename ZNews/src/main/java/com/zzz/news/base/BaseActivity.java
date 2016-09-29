@@ -23,14 +23,14 @@ public abstract class BaseActivity<T extends BasePresenter> extends SupportActiv
 
     @Inject
     protected T        mPresenter;
-    protected Activity mConext;
+    protected Activity mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayout());
         ButterKnife.bind(this);
-        mConext = this;
+        mContext = this;
         initInject();
         if (mPresenter != null) {
             mPresenter.attachView(this);

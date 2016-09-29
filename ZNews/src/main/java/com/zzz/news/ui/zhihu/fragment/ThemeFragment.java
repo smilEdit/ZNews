@@ -42,6 +42,7 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     @Override
     protected void initEventAndData() {
 
+        mViewLoading.start();
         mAdapter = new ThemeAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
@@ -56,7 +57,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
         mRvThemeContent.setAdapter(mAdapter);
         mPresenter.getThemeData();
         mRvThemeContent.setVisibility(View.INVISIBLE);
-        mViewLoading.start();
     }
 
     @Override

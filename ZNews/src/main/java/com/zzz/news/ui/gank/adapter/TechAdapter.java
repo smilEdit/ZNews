@@ -40,14 +40,16 @@ public class TechAdapter extends RecyclerView.Adapter<TechAdapter.ViewHolder> {
         return new ViewHolder(mInflater.inflate(R.layout.item_tech, parent, false));
     }
 
+//    private Drawable mDrawable_android,mDrawable_ios,mDrawable_web;
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+
 //        if(mTech.equals(TechPresenter.TECH_ANDROID)) {
-//            holder.ivIcon.setImageResource(R.mipmap.ic_android);
+//            holder.mTvTechTitle.setCompoundDrawables(R.drawable.item_ic_android,null,null,null);
 //        } else if(mTech.equals(TechPresenter.TECH_IOS)) {
-//            holder.ivIcon.setImageResource(R.mipmap.ic_ios);
+//            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_apple);
 //        } else if(mTech.equals(TechPresenter.TECH_WEB)) {
-//            holder.ivIcon.setImageResource(R.mipmap.ic_web);
+//            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_web);
 //        }
         holder.mTvTechTitle.setText(mList.get(position).getDesc());
         holder.mTvTechAuthor.setText(mList.get(position).getWho());
@@ -81,6 +83,8 @@ public class TechAdapter extends RecyclerView.Adapter<TechAdapter.ViewHolder> {
         TextView         mTvTechDate;
         @BindView(R.id.card)
         CardView mCard;
+//        @BindView(R.id.icon_item_tech)
+//        ImageView mIconItemTech;
 
         public ViewHolder(View itemView) {
             super(itemView);

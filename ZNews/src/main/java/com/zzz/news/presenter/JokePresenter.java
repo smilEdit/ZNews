@@ -34,7 +34,6 @@ public class JokePresenter extends RxPresenter<JokeContract.View> implements Jok
 
     @Override
     public void getJokeData() {
-
         Subscription rxSubscription = mRetrofitHelper.fetchJokeBean(++mPage,mPageSize,mSort,mTime)
                 .compose(ZRx.<JuheHttpResponse<JokeBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<JokeBean.ResultBean>handleJhResult())

@@ -47,24 +47,24 @@ public class SectionActivity extends BaseActivity<SectionChildPresenter> impleme
         Intent intent = getIntent();
         mId = intent.getExtras().getInt("id");
         setToolBar(mToolBar,intent.getStringExtra("title"));
-        mAdapter = new SectionChildAdapter(mConext, R.layout.item_daily, mList);
+        mAdapter = new SectionChildAdapter(mContext, R.layout.item_daily, mList);
         mLoadingAnmi.start();
         mList = new ArrayList<>();
-        mRvThemeContent.setLayoutManager(new LinearLayoutManager(mConext));
+        mRvThemeContent.setLayoutManager(new LinearLayoutManager(mContext));
         mRvThemeContent.setAdapter(mAdapter);
         mPresenter.getSectionChildData(mId);
 
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-//                ZToast.showShortToast(mConext,position+"");
+//                ZToast.showShortToast(mContext,position+"");
 //                mPresenter.intsert2db(mId);
 //                mAdapter.setReadState(position,true);
 //                mAdapter.notifyItemChanged(position);
 //                Intent intent = new Intent();
-//                intent.setClass(mConext, ZhihuDetailActivity.class);
+//                intent.setClass(mContext, ZhihuDetailActivity.class);
 //                intent.putExtra("id", mList.get(position).getId());
-//                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mConext).toBundle());
+//                startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mContext).toBundle());
             }
             @Override
             public boolean onItemLongClick(View view, RecyclerView.ViewHolder holder, int position) {
@@ -108,7 +108,7 @@ public class SectionActivity extends BaseActivity<SectionChildPresenter> impleme
         } else {
             mLoadingAnmi.stop();
         }
-        ZToast.showShortToast(mConext,msg);
+        ZToast.showShortToast(mContext,msg);
     }
 
 }

@@ -14,9 +14,18 @@ import java.util.List;
 public interface WeixinContract {
     interface View extends BaseView {
         void showContent(List<WeixinBean.ResultBean.ListBean> list);
+
+        void showMoreContent(List<WeixinBean.ResultBean.ListBean> list);
+
+        void showNewContent(List<WeixinBean.ResultBean.ListBean> list);
     }
 
     interface Presenter extends BasePresenter<View> {
         void getWeixinData();
+
+        void getMoreData();
+
+        void getNewContent();
+
     }
 }

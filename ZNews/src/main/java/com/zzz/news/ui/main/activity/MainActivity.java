@@ -31,17 +31,9 @@ import me.yokeyword.fragmentation.SupportFragment;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View, OnMenuItemClickListener, OnMenuItemLongClickListener {
 
-    //
-    //    @BindView(R.id.fl_main_content)
-    //    FrameLayout    mFlMainContent;
-    //    @BindView(R.id.nv_main)
-    //    NavigationView mNvMain;
-    //    @BindView(R.id.dl_main)
-    //    DrawerLayout   mDlMain;
     @BindView(R.id.tb_main)
     Toolbar mToolBar;
 
-    //    ActionBarDrawerToggle mDrawerToggle;
     ZhihuMainFragment mZhihuMainFragment;
 
     private ContextMenuDialogFragment mMenuDialogFragment;
@@ -93,7 +85,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showError(String msg) {
-
+        ZToast.showShortToast(mContext,msg);
     }
 
     @Override
@@ -136,7 +128,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void onMenuItemLongClick(View view, int position) {
-        ZToast.showShortToast(mConext, "longClick" + position);
+        ZToast.showShortToast(mContext, "longClick" + position);
     }
 
     private List<MenuObject> getMenuObjects() {

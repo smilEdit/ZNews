@@ -48,23 +48,13 @@ public class App extends Application {
         //初始化错误收集
         CrashHandler.init(new CrashHandler(getApplicationContext()));
 
-        //初始化内存泄漏检测
-//        LeakCanary.install(this);
-
         //初始化过度绘制检测
         //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
-        //初始化tbs x5 webview
-        //        QbSdk.allowThirdPartyAppDownload(true);
-        //        QbSdk.initX5Environment(getApplicationContext(), QbSdk.WebviewInitType.FIRSTUSE_AND_PRELOAD, new QbSdk.PreInitCallback() {
-        //            @Override
-        //            public void onCoreInitFinished() {
-        //            }
-        //
-        //            @Override
-        //            public void onViewInitFinished(boolean b) {
-        //            }
-        //        });
+        //初始化内存泄漏检测
+//        LeakCanary.install(this);
+
+
     }
 
     public void addAcitivity(Activity act) {

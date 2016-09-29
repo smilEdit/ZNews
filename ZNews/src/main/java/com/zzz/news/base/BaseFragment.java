@@ -73,6 +73,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends SupportFragm
         outState.putBoolean(STATE_SAVE_IS_HIDDEN,isHidden());
     }
 
+    @Override
+    public boolean onBackPressedSupport() {
+        return super.onBackPressedSupport();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

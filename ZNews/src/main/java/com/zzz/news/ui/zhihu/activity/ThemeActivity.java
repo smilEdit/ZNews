@@ -52,8 +52,8 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
         mId = intent.getExtras().getInt("id");
         mLoadingAnmi.start();
         mList = new ArrayList<>();
-        mAdapter = new ThemeChildAdapter(mConext, R.layout.item_daily, mList);
-        mRvThemeContent.setLayoutManager(new LinearLayoutManager(mConext));
+        mAdapter = new ThemeChildAdapter(mContext, R.layout.item_daily, mList);
+        mRvThemeContent.setLayoutManager(new LinearLayoutManager(mContext));
         mRvThemeContent.setAdapter(mAdapter);
         mPresenter.getThemeChildData(mId);
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
@@ -63,12 +63,12 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
                 mAdapter.setReadState(position,true);
                 mAdapter.notifyItemChanged(position);
                 Intent intent = new Intent();
-                intent.setClass(mConext, ZhihuDetailActivity.class);
+                intent.setClass(mContext, ZhihuDetailActivity.class);
                 intent.putExtra("id", mList.get(position).getId());
 //                if (shareView != null) {
 //                    mContext.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mContext, shareView, "shareView").toBundle());
 //                } else {
-                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mConext).toBundle());
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(mContext).toBundle());
 //                }
             }
 
@@ -117,7 +117,7 @@ public class ThemeActivity extends BaseActivity<ThemeChildPresenter> implements 
         } else {
             mLoadingAnmi.stop();
         }
-        ZToast.showShortToast(mConext,msg);
+        ZToast.showShortToast(mContext,msg);
     }
 
     @OnClick(R.id.fab_detail)

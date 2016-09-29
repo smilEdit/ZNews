@@ -8,7 +8,6 @@ import com.zzz.news.R;
 import com.zzz.news.base.SimpleFramgent;
 import com.zzz.news.ui.zhihu.adapter.ZhihuMainAdapter;
 import com.zzz.news.ui.zhihu.fragment.HotFragment;
-import com.zzz.news.ui.zhihu.fragment.SectionFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class JuHeMainFragment extends SimpleFramgent {
 
         mFragments.add(new TopNewsFragment());
         mFragments.add(new JokeFragment());
-        mFragments.add(new SectionFragment());
+        mFragments.add(new WeixinFragment());
         mFragments.add(new HotFragment());
 
         mAdapter = new ZhihuMainAdapter(getChildFragmentManager(), mFragments);

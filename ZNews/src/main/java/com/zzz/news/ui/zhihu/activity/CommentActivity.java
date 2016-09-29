@@ -41,6 +41,7 @@ public class CommentActivity extends SimpleActivity {
         int id = intent.getExtras().getInt("id");
         intent.getExtras().getInt("shortNum");
         setToolBar(mToolBar, String.format("%d条评论", allNum));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         CommentFragment shortCommentFragment = new CommentFragment();
         Bundle shortBundle = new Bundle();
         shortBundle.putInt("id", id);
@@ -67,4 +68,16 @@ public class CommentActivity extends SimpleActivity {
         return R.layout.activity_comment;
     }
 
+    @Override
+    public void onBackPressedSupport() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            pop();
+        } else {
+            finishAfterTransition();
+        }
+    }
+
+    public void toBack() {
+        onBackPressedSupport();
+    }
 }

@@ -115,7 +115,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     public void showContent(ZhihuDetailBean zhihuDetailBean) {
         mLoadingAnmi.stop();
         mShareUrl = zhihuDetailBean.getShare_url();
-        ZImageLoader.setImg(mConext, zhihuDetailBean.getImage(), mIvDetailBar);
+        ZImageLoader.setImg(mContext, zhihuDetailBean.getImage(), mIvDetailBar);
         mTvDetailBar.setText(zhihuDetailBean.getImage_source());
         mCtlDetailTitle.setTitle(zhihuDetailBean.getTitle());
         String htmlData = ZHtml.createHtmlData(zhihuDetailBean.getBody(), zhihuDetailBean.getCss(), zhihuDetailBean.getJs());
@@ -164,7 +164,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
                 startActivity(intent);
                 break;
             case R.id.tv_detail_bottom_share:
-                ZShare.shareText(mConext, mShareUrl, "给你看好");
+                ZShare.shareText(mContext, mShareUrl, "给你看好");
                 break;
             case R.id.fab_detail:
                 onBackPressedSupport();
@@ -175,7 +175,7 @@ public class ZhihuDetailActivity extends BaseActivity<ZhihuDetailPresenter> impl
     @Override
     public void showError(String msg) {
         mLoadingAnmi.stop();
-        ZToast.showLongToast(mConext, msg);
+        ZToast.showLongToast(mContext, msg);
     }
 
     @Override
