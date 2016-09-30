@@ -16,7 +16,7 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.WeixinBean;
 import com.zzz.news.presenter.WeixinPresenter;
 import com.zzz.news.presenter.contract.WeixinContract;
-import com.zzz.news.ui.juhe.activity.JuheDetailActivity;
+import com.zzz.news.ui.juhe.activity.JuheDatailActivity;
 import com.zzz.news.ui.juhe.adapter.WeixinAdapter;
 import com.zzz.news.util.ZToast;
 
@@ -79,7 +79,7 @@ public class WeixinFragment extends BaseFragment<WeixinPresenter> implements Wei
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 ZToast.showShortToast(mContext, mList.get(position).getUrl());
                 Intent intent = new Intent();
-                intent.setClass(mContext, JuheDetailActivity.class);
+                intent.setClass(mContext, JuheDatailActivity.class);
                 intent.putExtra("url", mList.get(position).getUrl());
                 intent.putExtra("title", mList.get(position).getTitle());
                 mContext.startActivity(intent);
