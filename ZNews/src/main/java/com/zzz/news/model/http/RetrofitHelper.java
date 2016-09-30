@@ -9,6 +9,8 @@ import com.zzz.news.model.bean.DetailExtraBean;
 import com.zzz.news.model.bean.GankItemBean;
 import com.zzz.news.model.bean.HotListBean;
 import com.zzz.news.model.bean.JokeBean;
+import com.zzz.news.model.bean.LishiBean;
+import com.zzz.news.model.bean.RobotBean;
 import com.zzz.news.model.bean.SectionChildListBean;
 import com.zzz.news.model.bean.SectionListBean;
 import com.zzz.news.model.bean.ThemeChildListBean;
@@ -47,6 +49,8 @@ public class RetrofitHelper {
     private static GankApis     sGankApis       = null;
     private static JuHeApis     sJuHeApis       = null;
     private static JuHeApis     sJuheApis       = null;
+    private static JuHeApis     sJuheRApis      = null;
+    private static JuHeApis     sJuHeLApis      = null;
 
     public RetrofitHelper() {
         init();
@@ -58,6 +62,8 @@ public class RetrofitHelper {
         sGankApis = getGankApisService();
         sJuHeApis = getJuHeApisService();
         sJuheApis = getJuHeJokeApisService();
+        sJuheRApis = getJuheRobotApisService();
+        sJuHeLApis = getJuheLishiApisService();
     }
 
     private void initOkHttp() {
@@ -204,8 +210,8 @@ public class RetrofitHelper {
         return sJuHeApis.getTopNewsList();
     }
 
-    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList(int ps,int pno) {
-        return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY,ps,pno);
+    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList(int ps, int pno) {
+        return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY, ps, pno);
     }
 
     //坑爹聚合 数据
@@ -223,5 +229,35 @@ public class RetrofitHelper {
     //@Query("pagesize") int pagesize, @Query("sort") String sort, @Query("time") String time);
     public Observable<JuheHttpResponse<JokeBean.ResultBean>> fetchJokeBean(int page, int pagesize, String sort, String time) {
         return sJuheApis.getJokeList(Constants.JUHE_JOKE_KEY, page, pagesize, sort, time);
+    }
+
+    //机器人聚合 数据
+    public static JuHeApis getJuheRobotApisService() {
+        Retrofit juheRetrofit = new Retrofit.Builder()
+                .baseUrl(JuHeApis.HOST_ROBOT)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return juheRetrofit.create(JuHeApis.class);
+    }
+
+    public Observable<JuheHttpResponse<RobotBean.ResultBean>> fetchRobotAnswer(String info) {
+        return sJuheRApis.getRobotInfo(info, Constants.JUHE_ROBOT_KEY);
+    }
+
+    //历史上的今天 数据
+    public static JuHeApis getJuheLishiApisService() {
+        Retrofit juheRetrofit = new Retrofit.Builder()
+                .baseUrl(JuHeApis.HOST_LISHI)
+                .client(sOkHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return juheRetrofit.create(JuHeApis.class);
+    }
+
+    public Observable<JuheHttpResponse<List<LishiBean.ResultBean>>> fetchLishiInfo(int month, int day) {
+        return sJuHeLApis.getLishiInfo(Constants.JUHE_LISHI_KEY, "1.0", month, day);
     }
 }

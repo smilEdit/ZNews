@@ -9,6 +9,7 @@ import com.zzz.news.ui.gank.fragment.GirlFragment;
 import com.zzz.news.ui.gank.fragment.TechFragment;
 import com.zzz.news.ui.juhe.fragment.JokeFragment;
 import com.zzz.news.ui.juhe.fragment.JuHeMainFragment;
+import com.zzz.news.ui.juhe.fragment.LishiFragment;
 import com.zzz.news.ui.juhe.fragment.TopNewsFragment;
 import com.zzz.news.ui.juhe.fragment.WeixinFragment;
 import com.zzz.news.ui.main.fragment.MeFragment;
@@ -69,4 +70,6 @@ public interface FragmentComponent {
     void inject(JokeFragment jokeFragment);
 
     void inject(WeixinFragment weixinFragment);
+
+    void inject(LishiFragment lishiFragment);
 }

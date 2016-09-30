@@ -1,11 +1,13 @@
 package com.zzz.news.ui.juhe.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zzz.news.R;
@@ -13,6 +15,8 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.TopNewsBean;
 import com.zzz.news.presenter.TopNewsPresenter;
 import com.zzz.news.presenter.contract.TopNewsContract;
+import com.zzz.news.ui.juhe.activity.JuheDatailActivity;
+import com.zzz.news.ui.juhe.activity.RobotActivity;
 import com.zzz.news.ui.juhe.adapter.TopNewsAdapter;
 import com.zzz.news.util.ZToast;
 
@@ -20,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * @创建者 zlf
@@ -33,6 +38,8 @@ public class TopNewsFragment extends BaseFragment<TopNewsPresenter> implements T
     RotateLoading      mLoadingAnmi;
     @BindView(R.id.srl_topnews_refresh)
     SwipeRefreshLayout mSrlTopnewsRefresh;
+    @BindView(R.id.fab_to_robot)
+    FloatingActionButton mFloatingActionButton;
 
     private List<TopNewsBean.ResultBean.DataBean> mList;
     private TopNewsAdapter mAdapter;
@@ -61,11 +68,11 @@ public class TopNewsFragment extends BaseFragment<TopNewsPresenter> implements T
         mAdapter.setOnItemClickListener(new MultiItemTypeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
-                ZToast.showShortToast(mContext, mList.get(position).getUrl());
-//                Intent intent = new Intent();
-//                intent.setClass(mContext, JuheDetailActivity.class);
-//                intent.putExtra("url", mList.get(position).getUrl());
-//                mContext.startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(mContext, JuheDatailActivity.class);
+                intent.putExtra("title", mList.get(position).getTitle());
+                intent.putExtra("url", mList.get(position).getUrl());
+                mContext.startActivity(intent);
             }
 
             @Override
@@ -73,6 +80,7 @@ public class TopNewsFragment extends BaseFragment<TopNewsPresenter> implements T
                 return false;
             }
         });
+        mFloatingActionButton.attachToRecyclerView(mRvTopnewsContent);
     }
 
     @Override
@@ -97,5 +105,10 @@ public class TopNewsFragment extends BaseFragment<TopNewsPresenter> implements T
         mList.clear();
         mList.addAll(list);
         mAdapter.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.fab_to_robot)
+    public void onClick(View view) {
+        startActivity(new Intent(mContext, RobotActivity.class));
     }
 }

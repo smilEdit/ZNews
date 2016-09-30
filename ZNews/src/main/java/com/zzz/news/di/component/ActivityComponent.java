@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.zzz.news.di.ActivityScope;
 import com.zzz.news.di.module.ActivityModule;
+import com.zzz.news.ui.juhe.activity.RobotActivity;
 import com.zzz.news.ui.main.activity.MainActivity;
 import com.zzz.news.ui.zhihu.activity.SectionActivity;
 import com.zzz.news.ui.zhihu.activity.ThemeActivity;
@@ -34,5 +35,7 @@ public interface ActivityComponent {
     void inject(ThemeActivity themeActivity);
 
     void inject(SectionActivity sectionActivity);
+
+    void inject(RobotActivity robotActivity);
 }
 

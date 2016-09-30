@@ -7,7 +7,6 @@ import android.support.v4.view.ViewPager;
 import com.zzz.news.R;
 import com.zzz.news.base.SimpleFramgent;
 import com.zzz.news.ui.zhihu.adapter.ZhihuMainAdapter;
-import com.zzz.news.ui.zhihu.fragment.HotFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +24,7 @@ public class JuHeMainFragment extends SimpleFramgent {
     @BindView(R.id.tl_juhe_main)
     TabLayout mTljuheMain;
 
-    String[] tabTitle = new String[]{"头条", "笑话", "微信精选", "未知"};
+    String[] tabTitle = new String[]{"头条", "笑话", "微信精选", "历史今天"};
 
     List<Fragment> mFragments = new ArrayList<Fragment>();
     private ZhihuMainAdapter mAdapter;
@@ -36,7 +35,7 @@ public class JuHeMainFragment extends SimpleFramgent {
         mFragments.add(new TopNewsFragment());
         mFragments.add(new JokeFragment());
         mFragments.add(new WeixinFragment());
-        mFragments.add(new HotFragment());
+        mFragments.add(new LishiFragment());
 
         mAdapter = new ZhihuMainAdapter(getChildFragmentManager(), mFragments);
         mVpJuheMain.setAdapter(mAdapter);

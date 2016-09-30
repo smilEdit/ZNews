@@ -3,6 +3,7 @@ package com.zzz.news.ui.gank.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,29 +41,31 @@ public class TechAdapter extends RecyclerView.Adapter<TechAdapter.ViewHolder> {
         return new ViewHolder(mInflater.inflate(R.layout.item_tech, parent, false));
     }
 
-//    private Drawable mDrawable_android,mDrawable_ios,mDrawable_web;
+    //    private Drawable mDrawable_android,mDrawable_ios,mDrawable_web;
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
-//        if(mTech.equals(TechPresenter.TECH_ANDROID)) {
-//            holder.mTvTechTitle.setCompoundDrawables(R.drawable.item_ic_android,null,null,null);
-//        } else if(mTech.equals(TechPresenter.TECH_IOS)) {
-//            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_apple);
-//        } else if(mTech.equals(TechPresenter.TECH_WEB)) {
-//            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_web);
-//        }
+        //        if(mTech.equals(TechPresenter.TECH_ANDROID)) {
+        //            holder.mTvTechTitle.setCompoundDrawables(R.drawable.item_ic_android,null,null,null);
+        //        } else if(mTech.equals(TechPresenter.TECH_IOS)) {
+        //            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_apple);
+        //        } else if(mTech.equals(TechPresenter.TECH_WEB)) {
+        //            holder.mIconItemTech.setImageResource(R.mipmap.item_ic_web);
+        //        }
         holder.mTvTechTitle.setText(mList.get(position).getDesc());
-        holder.mTvTechAuthor.setText(mList.get(position).getWho());
+        if (!TextUtils.isEmpty(mList.get(position).getWho())) {
+            holder.mTvTechAuthor.setText(mList.get(position).getWho());
+        }
         String date = mList.get(position).getPublishedAt();
         int idx = date.indexOf(".");
-        date = date.substring(0,idx).replace("T"," ");
-        holder.mTvTechDate.setText(ZDate.formatDateTime(date,true));
+        date = date.substring(0, idx).replace("T", " ");
+        holder.mTvTechDate.setText(ZDate.formatDateTime(date, true));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mOnItemClickListener != null) {
+                if (mOnItemClickListener != null) {
                     CardView cv = (CardView) view.findViewById(R.id.card);
-                    mOnItemClickListener.onItemClick(holder.getAdapterPosition(),cv);
+                    mOnItemClickListener.onItemClick(holder.getAdapterPosition(), cv);
                 }
             }
         });
@@ -78,26 +81,28 @@ public class TechAdapter extends RecyclerView.Adapter<TechAdapter.ViewHolder> {
         @BindView(R.id.tv_tech_title)
         TextView mTvTechTitle;
         @BindView(R.id.tv_tech_author)
-        TextView         mTvTechAuthor;
+        TextView mTvTechAuthor;
         @BindView(R.id.tv_tech_date)
-        TextView         mTvTechDate;
+        TextView mTvTechDate;
         @BindView(R.id.card)
         CardView mCard;
-//        @BindView(R.id.icon_item_tech)
-//        ImageView mIconItemTech;
+        //        @BindView(R.id.icon_item_tech)
+        //        ImageView mIconItemTech;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
+
     //item回调
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onItemClick(int position, View view);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
+
     private OnItemClickListener mOnItemClickListener;
 }

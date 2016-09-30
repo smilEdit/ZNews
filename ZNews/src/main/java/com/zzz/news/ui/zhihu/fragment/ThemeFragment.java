@@ -3,7 +3,6 @@ package com.zzz.news.ui.zhihu.fragment;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.news.R;
@@ -42,7 +41,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     @Override
     protected void initEventAndData() {
 
-        mViewLoading.start();
         mAdapter = new ThemeAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new ThemeAdapter.OnItemClickListener() {
             @Override
@@ -53,10 +51,10 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
                 mContext.startActivity(intent);
             }
         });
-        mRvThemeContent.setLayoutManager(new GridLayoutManager(mContext,2));
+        mRvThemeContent.setLayoutManager(new GridLayoutManager(mContext, 2));
         mRvThemeContent.setAdapter(mAdapter);
         mPresenter.getThemeData();
-        mRvThemeContent.setVisibility(View.INVISIBLE);
+        mViewLoading.start();
     }
 
     @Override
@@ -67,7 +65,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     @Override
     public void showContent(ThemeListBean themeListBean) {
         mViewLoading.stop();
-        mRvThemeContent.setVisibility(View.VISIBLE);
         mList.clear();
         mList.addAll(themeListBean.getOthers());
     }
@@ -76,7 +73,6 @@ public class ThemeFragment extends BaseFragment<ThemePresenter> implements Theme
     @Override
     public void showError(String msg) {
         mViewLoading.stop();
-        mRvThemeContent.setVisibility(View.VISIBLE);
         ZToast.showLongToast(mContext, "数据加载失败");
     }
 }

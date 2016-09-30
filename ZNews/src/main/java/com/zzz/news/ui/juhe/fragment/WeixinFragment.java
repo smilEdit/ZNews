@@ -1,11 +1,13 @@
 package com.zzz.news.ui.juhe.fragment;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zhy.adapter.recyclerview.MultiItemTypeAdapter;
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
@@ -14,6 +16,7 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.WeixinBean;
 import com.zzz.news.presenter.WeixinPresenter;
 import com.zzz.news.presenter.contract.WeixinContract;
+import com.zzz.news.ui.juhe.activity.JuheDetailActivity;
 import com.zzz.news.ui.juhe.adapter.WeixinAdapter;
 import com.zzz.news.util.ZToast;
 
@@ -30,11 +33,13 @@ import butterknife.BindView;
 
 public class WeixinFragment extends BaseFragment<WeixinPresenter> implements WeixinContract.View {
     @BindView(R.id.rv_topnews_content)
-    RecyclerView       mRvTopnewsContent;
+    RecyclerView         mRvTopnewsContent;
     @BindView(R.id.loading_anmi)
-    RotateLoading      mLoadingAnmi;
+    RotateLoading        mLoadingAnmi;
     @BindView(R.id.srl_topnews_refresh)
-    SwipeRefreshLayout mSrlTopnewsRefresh;
+    SwipeRefreshLayout   mSrlTopnewsRefresh;
+    @BindView(R.id.fab_to_robot)
+    FloatingActionButton mFloatingActionButton;
 
     private List<WeixinBean.ResultBean.ListBean> mList;
     private WeixinAdapter                        mAdapter;
@@ -48,6 +53,7 @@ public class WeixinFragment extends BaseFragment<WeixinPresenter> implements Wei
 
     @Override
     protected void initEventAndData() {
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
         mList = new ArrayList<>();
         mLoadingAnmi.start();
         mAdapter = new WeixinAdapter(mContext, R.layout.item_topnews, mList);
@@ -72,10 +78,11 @@ public class WeixinFragment extends BaseFragment<WeixinPresenter> implements Wei
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 ZToast.showShortToast(mContext, mList.get(position).getUrl());
-                //                Intent intent = new Intent();
-                //                intent.setClass(mContext, JuheDetailActivity.class);
-                //                intent.putExtra("url", mList.get(position).getUrl());
-                //                mContext.startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(mContext, JuheDetailActivity.class);
+                intent.putExtra("url", mList.get(position).getUrl());
+                intent.putExtra("title", mList.get(position).getTitle());
+                mContext.startActivity(intent);
             }
 
             @Override

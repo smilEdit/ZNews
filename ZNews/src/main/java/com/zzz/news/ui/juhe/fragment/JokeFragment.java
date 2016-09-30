@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.victor.loading.rotate.RotateLoading;
 import com.zhy.adapter.recyclerview.wrapper.LoadMoreWrapper;
 import com.zzz.news.R;
@@ -27,18 +29,21 @@ import butterknife.BindView;
 
 public class JokeFragment extends BaseFragment<JokePresenter> implements JokeContract.View {
     @BindView(R.id.rv_topnews_content)
-    RecyclerView       mRvTopnewsContent;
+    RecyclerView         mRvTopnewsContent;
     @BindView(R.id.loading_anmi)
-    RotateLoading      mLoadingAnmi;
+    RotateLoading        mLoadingAnmi;
     @BindView(R.id.srl_topnews_refresh)
-    SwipeRefreshLayout mSrlTopnewsRefresh;
+    SwipeRefreshLayout   mSrlTopnewsRefresh;
+    @BindView(R.id.fab_to_robot)
+    FloatingActionButton mFloatingActionButton;
 
     private List<JokeBean.ResultBean.DataBean> mList;
-    private JokeAdapter mAdapter;
-    private LoadMoreWrapper<Object> mMoreWrapper;
+    private JokeAdapter                        mAdapter;
+    private LoadMoreWrapper<Object>            mMoreWrapper;
 
     @Override
     protected void initEventAndData() {
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
         mList = new ArrayList<>();
         mLoadingAnmi.start();
         mAdapter = new JokeAdapter(mContext, R.layout.item_joke, mList);

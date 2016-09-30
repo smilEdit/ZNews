@@ -1,8 +1,7 @@
-package com.zzz.news.ui.gank.activity;
+package com.zzz.news.ui.juhe.activity;
 
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -10,41 +9,31 @@ import android.webkit.WebViewClient;
 
 import com.victor.loading.rotate.RotateLoading;
 import com.zzz.news.R;
-import com.zzz.news.app.App;
 import com.zzz.news.base.SimpleActivity;
-import com.zzz.news.model.db.RealmHelper;
 
 import butterknife.BindView;
 
 /**
  * @创建者 zlf
- * @创建时间 2016/9/27 13:12
+ * @创建时间 2016/9/29 17:22
  */
 
-public class TechDetailActivity extends SimpleActivity {
+public class JuheDatailActivity extends SimpleActivity {
     @BindView(R.id.tool_bar)
-    Toolbar              mToolBar;
+    Toolbar       mToolBar;
     @BindView(R.id.wv_tech_content)
-    WebView              mWvTechContent;
+    WebView       mWvTechContent;
     @BindView(R.id.loading_anmi)
-    RotateLoading        mLoadingAnmi;
-//    @BindView(R.id.fab_tech_detail)
-//    FloatingActionButton mFabTechDetail;
+    RotateLoading mLoadingAnmi;
 
-    private String mTitle, mUrl, mId, mTech;
-    private boolean     isLiked;
-    private RealmHelper mRealmHelper;
-
+    private String mTitle, mUrl;
     @Override
     protected void initEventAndData() {
-        mRealmHelper = App.getAppComponent().realmHelper();
         Intent intent = getIntent();
-        mTech = intent.getExtras().getString("tech");
         mTitle = intent.getExtras().getString("title");
         mUrl = intent.getExtras().getString("url");
-        mId = intent.getExtras().getString("id");
         setToolBar(mToolBar, mTitle);
-//        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        //        getSupportActionBar().setDisplayShowHomeEnabled(false);
         WebSettings settings = mWvTechContent.getSettings();
 
         settings.setJavaScriptEnabled(true);
@@ -85,25 +74,4 @@ public class TechDetailActivity extends SimpleActivity {
         return R.layout.activity_tech_detail;
     }
 
-    @Override
-    public void onBackPressedSupport() {
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
-            pop();
-        } else {
-            finishAfterTransition();
-        }
-    }
-
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && mWvTechContent.canGoBack()) {
-            mWvTechContent.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-//    @OnClick(R.id.fab_tech_detail)
-//    public void onClick() {
-//
-//    }
 }
