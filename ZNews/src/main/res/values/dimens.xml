@@ -8,4 +8,9 @@
     <dimen name="detail_bottom_height">54dp</dimen>
     <dimen name="comment_face_size">50dp</dimen>
     <dimen name="iv_section">120dp</dimen>
+
+    <!-- dimensions -->
+    <dimen name="image_width">120dp</dimen>
+    <dimen name="image_final_width">32dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
 </resources>

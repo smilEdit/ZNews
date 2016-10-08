@@ -13,6 +13,7 @@ import com.zzz.news.ui.juhe.fragment.LishiFragment;
 import com.zzz.news.ui.juhe.fragment.TopNewsFragment;
 import com.zzz.news.ui.juhe.fragment.WeixinFragment;
 import com.zzz.news.ui.main.fragment.MeFragment;
+import com.zzz.news.ui.main.fragment.PersonFragment;
 import com.zzz.news.ui.zhihu.fragment.CommentFragment;
 import com.zzz.news.ui.zhihu.fragment.DailyFragment;
 import com.zzz.news.ui.zhihu.fragment.HotFragment;
@@ -60,6 +61,8 @@ public interface FragmentComponent {
     //main fragment
 
     void inject(MeFragment meFragment);
+
+    void inject(PersonFragment personFragment);
 
     //聚合 fragment
 

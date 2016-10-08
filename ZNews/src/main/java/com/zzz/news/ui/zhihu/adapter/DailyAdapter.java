@@ -32,7 +32,7 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private LayoutInflater mInflater;
     private boolean isBefore = false;
-    private String  mTitle   = "今日热闻";
+    private String  mTitle   = "今日新闻";
     private Context         mContext;
     private TopPagerAdapter mAdapter;
     private ViewPager       mTopViewPager;

@@ -33,6 +33,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+
+
 /**
  * @创建者 zlf
  * @创建时间 2016/9/20 14:56
@@ -68,7 +70,7 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     @Override
     protected void initEventAndData() {
         mRealmHelper = App.getAppComponent().realmHelper();
-        mCurrentDate = ZDate.getCurrentDate();
+        mCurrentDate = ZDate.getTomorrowDate();
         mAdapter = new DailyAdapter(mContext, mList);
         mAdapter.setOnItemClickListener(new DailyAdapter.OnItemClickListener() {
 
@@ -91,9 +93,8 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
         mSrlDailyRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mRvDailyList.setVisibility(View.INVISIBLE);
                 mRlDailyLoading.start();
-                if (mCurrentDate.equals("今日新闻")) {
+                if (mCurrentDate.equals(ZDate.getTomorrowDate())) {
                     mPresenter.getDailyData();
                 } else {
                     int year = Integer.valueOf(mCurrentDate.substring(0, 4));
@@ -125,12 +126,11 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
 
     @Override
     public void showMoreContent(String date, DailyBeforeListBean info) {
-        mPresenter.startInterval();
         mSrlDailyRefresh.setRefreshing(false);
+        mPresenter.stopInterval();
         mList = info.getStories();
-        mCurrentDate = String.valueOf(Integer.valueOf(info.getDate() + 1));
+        mCurrentDate = String.valueOf(Integer.valueOf(info.getDate()));
         mRlDailyLoading.stop();
-        mRvDailyList.setVisibility(View.VISIBLE);
         mAdapter.addDailyBeforeDate(info);
     }
 
@@ -143,15 +143,12 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     @Override
     public void showProgress() {
         mRlDailyLoading.start();
-        mRvDailyList.setVisibility(View.INVISIBLE);
-
     }
 
     @Override
     public void doInterval(int currentCount) {
         mAdapter.changeTopPager(currentCount);
     }
-
 
     @OnClick(R.id.fab_daily_calender)
     public void onClick(View view) {

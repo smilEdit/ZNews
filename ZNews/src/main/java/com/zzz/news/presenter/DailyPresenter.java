@@ -8,6 +8,7 @@ import com.zzz.news.model.bean.DailyListBean;
 import com.zzz.news.model.db.RealmHelper;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.DailyContract;
+import com.zzz.news.util.ZDate;
 import com.zzz.news.util.ZLog;
 import com.zzz.news.util.ZRx;
 
@@ -64,6 +65,16 @@ public class DailyPresenter extends RxPresenter<DailyContract.View> implements D
                             day = "0" + day;
                         }
                         return date.append(year).append(month).append(day).toString();
+                    }
+                })
+                .filter(new Func1<String, Boolean>() {
+                    @Override
+                    public Boolean call(String s) {
+                        if (s.equals(ZDate.getTomorrowDate())) {
+                            getDailyData();
+                            return false;
+                        }
+                        return true;
                     }
                 })
                 .observeOn(Schedulers.io())  //访问网络 切IO线程
