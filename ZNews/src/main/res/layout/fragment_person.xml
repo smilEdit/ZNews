@@ -22,7 +22,7 @@
             <ImageView
                 android:id="@+id/person_imageview_placeholder"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="380dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/kenan"
                 android:tint="#11000000"
@@ -56,14 +56,14 @@
                         android:gravity="bottom|center"
                         android:text="zzzzlf"
                         android:textColor="@android:color/white"
-                        android:textSize="30sp"
+                        android:textSize="28sp"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="4dp"
+                        android:layout_marginTop="2dp"
                         android:text="About Me and This App"
                         android:textColor="@android:color/white"
                         />
@@ -91,24 +91,39 @@
             <android.support.v7.widget.CardView
 
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp">
 
                 <TextView
                     android:layout_width="match_parent"
-
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="8dp"
-                    android:text="@string/tv_me_title"
+                    android:text="Author : https://github.com/smilEdit"
                     android:textSize="18sp"/>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="6dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/tv_me_tech"
+                    android:textSize="18sp"/>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 app:cardCornerRadius="6dp"
                 app:cardElevation="6dp">
@@ -117,22 +132,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="8dp"
-                    android:text="@string/tv_me_title"
-                    android:textSize="18sp"/>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_margin="6dp"
-                app:cardCornerRadius="6dp"
-                app:cardElevation="6dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="8dp"
-                    android:text="@string/tv_me_title"
+                    android:text="@string/tv_me_desc"
                     android:textSize="18sp"/>
             </android.support.v7.widget.CardView>
         </LinearLayout>
@@ -176,8 +176,8 @@
     </android.support.v7.widget.Toolbar>
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
         android:src="@mipmap/z_launcher"
         app:border_color="@android:color/white"

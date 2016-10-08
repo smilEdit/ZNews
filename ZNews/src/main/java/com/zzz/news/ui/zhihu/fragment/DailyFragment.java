@@ -48,8 +48,6 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
     FloatingActionButton mFabDailyCalender;
     @BindView(R.id.srl_daily_refresh)
     SwipeRefreshLayout   mSrlDailyRefresh;
-/*    @BindView(R.id.fab_daily_menu)
-    FloatingActionButton mFabDailyMenu;*/
 
     RealmHelper  mRealmHelper;
     DailyAdapter mAdapter;
@@ -158,8 +156,6 @@ public class DailyFragment extends BaseFragment<DailyPresenter> implements Daily
                 intent.setClass(mContext, CalendarActivity.class);
                 ZCircularAnim.startActivity(mActivity, intent, mFabDailyCalender, R.color.colorPrimary);
                 break;
-            //            case R.id.fab_daily_menu:
-            //                break;
         }
     }
 }

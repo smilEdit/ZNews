@@ -13,6 +13,9 @@
     <string name="share">分享</string>
     <string name="save">保存</string>
     <string name="yiming">佚名</string>
-    <string name="me_title"><![CDATA[http://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E6%9F%AF%E5%8D%97&step_word=&hs=0&pn=0&spn=0&di=76073197970&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=1027335065%2C2561779208&os=1737824431%2C1992966229&simid=4213032128%2C556529538&adpicid=0&ln=1966&fr=&fmq=1475214074611_R&fm=result&ic=0&s=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=&bdtype=0&oriquery=&objurl=http%3A%2F%2Fbaike.soso.com%2Fp%2F20100209%2F20100209194645-507652227.jpg&fromurl=ippr_z2C%24qAzdH3FAzdH3Fkwthj_z%26e3Bf5f5_z%26e3Bv54AzdH3Fidbmna_z%26e3Bip4%3Ffr%3DSr6je%26fr%3Ds8ada80dc&gsm=0&rpstart=0&rpnum=0]]></string>
     <string name="tv_me_title">道 可 道 ， 非 常 道 。 名 可 名 ， 非 常 名 。无 名 天 地 之 始 ﹔ 有 名 万 物 之 母 。故 常 无 ， 欲 以 观 其 妙 ﹔ 常 有 ， 欲 以 观 其 徼 。此 两 者 ， 同 出 而 异 名 ， 同 谓 之 玄 。玄 之 又 玄 ， 众 妙 之 门 。</string>
+    <string name="tv_me_tech">MVP + Dagger2 + Rx + Retrofit + Realm</string>
+    <string name="tv_me_desc">ZNew : \n \t 纯粹的阅读App，出于学习的目的做的这个应用，采用的各个框架都是目前Android开发最新最常用的。        \n
+        \t Api获取来源于聚合，知乎日报，微信精选，干货集中营。
+        \n \t 目前只是实现了最基本的阅读功能，还存在许多Bug。之后会添加缓存数据清除，夜间模式，收藏夹等功能。</string>
 </resources>
