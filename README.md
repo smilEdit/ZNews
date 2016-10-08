@@ -6,9 +6,13 @@
  Api获取来源于聚合，知乎日报，微信精选，干货集中营。
  目前只是实现了最基本的阅读功能，还存在许多Bug。
 
- 之后会添加缓存数据清除，夜间模式，收藏夹等功能。
+ 之后会添加缓存数据清除，夜间模式，收藏夹等基本功能。
 
 ##预览
+
+![](https://github.com/smilEdit/EShare/blob/master/screenshots/aboutme.gif) &nbsp;&nbsp;&nbsp;
+![](https://github.com/smilEdit/EShare/blob/master/screenshots/tulin.gif) &nbsp;&nbsp;&nbsp;
+![](https://github.com/smilEdit/EShare/blob/master/screenshots/youxi.gif)
 
 
 ##用到的三方
