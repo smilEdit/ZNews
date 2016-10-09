@@ -65,7 +65,7 @@ public class PersonFragment extends SimpleFramgent implements AppBarLayout.OnOff
     public void onOffsetChanged(AppBarLayout appBarLayout, int offset) {
         int maxScroll = appBarLayout.getTotalScrollRange();
         float percentage = (float) Math.abs(offset) / (float) maxScroll;
-
+        mPersonImageviewPlaceholder.setAlpha(1-percentage);
         handleAlphaOnTitle(percentage);
         handleToolbarTitleVisibility(percentage);
     }

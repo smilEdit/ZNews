@@ -15,7 +15,7 @@ import com.zzz.news.base.BaseFragment;
 import com.zzz.news.model.bean.TopNewsBean;
 import com.zzz.news.presenter.TopNewsPresenter;
 import com.zzz.news.presenter.contract.TopNewsContract;
-import com.zzz.news.ui.juhe.activity.JuheDatailActivity;
+import com.zzz.news.ui.juhe.activity.JuheDetailActivity;
 import com.zzz.news.ui.juhe.activity.RobotActivity;
 import com.zzz.news.ui.juhe.adapter.TopNewsAdapter;
 import com.zzz.news.util.ZToast;
@@ -69,7 +69,7 @@ public class TopNewsFragment extends BaseFragment<TopNewsPresenter> implements T
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 Intent intent = new Intent();
-                intent.setClass(mContext, JuheDatailActivity.class);
+                intent.setClass(mContext, JuheDetailActivity.class);
                 intent.putExtra("title", mList.get(position).getTitle());
                 intent.putExtra("url", mList.get(position).getUrl());
                 mContext.startActivity(intent);

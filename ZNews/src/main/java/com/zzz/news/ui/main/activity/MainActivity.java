@@ -19,6 +19,7 @@ import com.zzz.news.presenter.contract.MainContract;
 import com.zzz.news.ui.gank.fragment.GankMainFragment;
 import com.zzz.news.ui.juhe.fragment.JuHeMainFragment;
 import com.zzz.news.ui.main.fragment.PersonFragment;
+import com.zzz.news.ui.main.fragment.SettingFragment;
 import com.zzz.news.ui.zhihu.fragment.ZhihuMainFragment;
 import com.zzz.news.util.ZToast;
 
@@ -42,13 +43,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     private static final String ITEM_GANK  = "干货集中营";
     private static final String ITEM_ME = "Me";
     public static final String ITEM_JUHE = "聚合数据";
+    public static final String ITEM_SETTING = "设置";
 
     private FragmentManager  fragmentManager;
-//    private MeFragment mMeFragment;
     private GankMainFragment mGankMainFragment;
     private JuHeMainFragment mJuHeMainFragment;
     private SupportFragment mCurrentFragment;
     private PersonFragment mPersonFragment;
+    private SettingFragment mSettingFragment;
+
 
     @Override
     protected void initInject() {
@@ -67,11 +70,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         fragmentManager = getSupportFragmentManager();
         mZhihuMainFragment = new ZhihuMainFragment();
         mGankMainFragment = new GankMainFragment();
-//        mMeFragment = new MeFragment();
         mPersonFragment = new PersonFragment();
         mJuHeMainFragment = new JuHeMainFragment();
+        mSettingFragment = new SettingFragment();
         mCurrentFragment = mZhihuMainFragment;
-        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment,mPersonFragment,mJuHeMainFragment);
+        loadMultipleRootFragment(R.id.fl_main_content, 0, mZhihuMainFragment, mGankMainFragment,mPersonFragment,mJuHeMainFragment,mSettingFragment);
         initMenuFragment();
     }
 
@@ -124,6 +127,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 showHideFragment(mPersonFragment, mCurrentFragment);
                 setToolBar(mToolBar,ITEM_ME);
                 mCurrentFragment = mPersonFragment;
+                break;
+            case 6:
+                if (mCurrentFragment == mSettingFragment) {
+                    return;
+                }
+                showHideFragment(mSettingFragment, mCurrentFragment);
+                setToolBar(mToolBar,ITEM_SETTING);
+                mCurrentFragment = mSettingFragment;
                 break;
         }
     }

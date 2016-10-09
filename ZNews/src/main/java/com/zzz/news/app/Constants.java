@@ -10,6 +10,11 @@ import java.io.File;
 public class Constants {
 
     /**
+     * TYPE
+     */
+//    public static final int
+
+    /**
      * KEY
      */
 

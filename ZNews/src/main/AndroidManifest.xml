@@ -46,7 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>-->
         </activity>
-        <activity android:name=".ui.juhe.activity.JuheDatailActivity"/>
+        <activity android:name=".ui.juhe.activity.JuheDetailActivity"/>
     </application>
     <!--<meta-data-->
         <!--android:value="YOUR_APP_KEY"-->

@@ -12,8 +12,10 @@ import com.zzz.news.ui.juhe.fragment.JuHeMainFragment;
 import com.zzz.news.ui.juhe.fragment.LishiFragment;
 import com.zzz.news.ui.juhe.fragment.TopNewsFragment;
 import com.zzz.news.ui.juhe.fragment.WeixinFragment;
+import com.zzz.news.ui.main.fragment.LikeFragment;
 import com.zzz.news.ui.main.fragment.MeFragment;
 import com.zzz.news.ui.main.fragment.PersonFragment;
+import com.zzz.news.ui.main.fragment.SettingFragment;
 import com.zzz.news.ui.zhihu.fragment.CommentFragment;
 import com.zzz.news.ui.zhihu.fragment.DailyFragment;
 import com.zzz.news.ui.zhihu.fragment.HotFragment;
@@ -36,6 +38,16 @@ public interface FragmentComponent {
 
     Activity getActivity();
 
+    //main fragment
+
+    void inject(MeFragment meFragment);
+
+    void inject(PersonFragment personFragment);
+
+    void inject(SettingFragment settingFragment);
+
+    void inject(LikeFragment likeFragment);
+
     //知乎 Fragment
 
     void inject(ZhihuMainFragment zhihuMainFragment);
@@ -57,12 +69,6 @@ public interface FragmentComponent {
     void inject(TechFragment techFragment);
 
     void inject(GirlFragment girlFragment);
-
-    //main fragment
-
-    void inject(MeFragment meFragment);
-
-    void inject(PersonFragment personFragment);
 
     //聚合 fragment
 
