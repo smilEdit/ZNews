@@ -8,6 +8,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import com.orhanobut.logger.Logger;
+import com.squareup.leakcanary.LeakCanary;
 import com.zzz.news.component.CrashHandler;
 import com.zzz.news.di.component.AppComponent;
 import com.zzz.news.di.component.DaggerAppComponent;
@@ -52,8 +53,7 @@ public class App extends Application {
         //        BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
         //初始化内存泄漏检测
-//        LeakCanary.install(this);
-
+        LeakCanary.install(this);
 
     }
 
