@@ -9,6 +9,8 @@ import android.view.View;
 
 import com.zzz.news.R;
 
+import static com.zzz.news.R.drawable.water;
+
 /**
  * @创建者 zlf
  * @创建时间 2016/10/9 9:25
@@ -49,7 +51,7 @@ public class WaterScreenView extends View {
 
     private void init() {
         mRenderables = new Renderable[2];
-        Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.water);
+        Bitmap waterBitmap = BitmapFactory.decodeResource(getResources(), water);
         Bitmap foam = BitmapFactory.decodeResource(getResources(), R.drawable.foam);
         setLayerType(View.LAYER_TYPE_HARDWARE, null);
         mWater = new Water(waterBitmap, foam, getHeight() * 0.65f, getWidth(), getHeight(), 6);
@@ -73,5 +75,19 @@ public class WaterScreenView extends View {
     }
 
     private boolean isPause = false;
+
+//    private Water water;
+//
+//    private float getYCoordByPercent(float percent) {
+//        return getHeight() * percent;
+//    }
+//
+//    private float getXCoordByPercent(float percent) {
+//        return getWidth() * percent;
+//    }
+//
+//    public void setWaveHeight(float height) {
+//        water.setWaveHeight(height);
+//    }
 }
 

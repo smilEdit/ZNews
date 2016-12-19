@@ -72,6 +72,8 @@ public class Water extends Renderable {
         }
     }
 
+
+
     @Override
     public void update(float deltaTime) {
         mWaterMesh.matchVertsToPath(mWaterPath, mHeight, ((bitmap.getWidth() / mNumWaves) * 4f));
