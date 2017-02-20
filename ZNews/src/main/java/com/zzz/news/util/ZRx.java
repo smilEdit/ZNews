@@ -2,7 +2,8 @@ package com.zzz.news.util;
 
 import com.zzz.news.model.http.ApiException;
 import com.zzz.news.model.http.HttpResponse;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -51,13 +52,13 @@ public class ZRx {
         };
     }
 
-    public static <T> Observable.Transformer<JuheHttpResponse<T>, T> handleJhResult() {   //compose判断结果
-        return new Observable.Transformer<JuheHttpResponse<T>, T>() {
+    public static <T> Observable.Transformer<JuHeHttpResponse<T>, T> handleJhResult() {   //compose判断结果
+        return new Observable.Transformer<JuHeHttpResponse<T>, T>() {
             @Override
-            public Observable<T> call(Observable<JuheHttpResponse<T>> httpResponseObservable) {
-                return httpResponseObservable.flatMap(new Func1<JuheHttpResponse<T>, Observable<T>>() {
+            public Observable<T> call(Observable<JuHeHttpResponse<T>> httpResponseObservable) {
+                return httpResponseObservable.flatMap(new Func1<JuHeHttpResponse<T>, Observable<T>>() {
                     @Override
-                    public Observable<T> call(JuheHttpResponse<T> tHttpResponse) {
+                    public Observable<T> call(JuHeHttpResponse<T> tHttpResponse) {
                         if(tHttpResponse.getError_code()==0) {
                             ZLog.e("Transformer");
                             return createData(tHttpResponse.getResult());

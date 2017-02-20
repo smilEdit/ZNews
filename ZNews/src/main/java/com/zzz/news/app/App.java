@@ -11,6 +11,7 @@ import com.orhanobut.logger.Logger;
 import com.squareup.leakcanary.LeakCanary;
 import com.zzz.news.component.CrashHandler;
 import com.zzz.news.di.component.AppComponent;
+
 import com.zzz.news.di.component.DaggerAppComponent;
 import com.zzz.news.di.module.AppModule;
 

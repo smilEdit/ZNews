@@ -2,7 +2,7 @@ package com.zzz.news.presenter;
 
 import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.JokeBean;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.JokeContract;
 import com.zzz.news.util.ZLog;
@@ -35,7 +35,7 @@ public class JokePresenter extends RxPresenter<JokeContract.View> implements Jok
     @Override
     public void getJokeData() {
         Subscription rxSubscription = mRetrofitHelper.fetchJokeBean(++mPage,mPageSize,mSort,mTime)
-                .compose(ZRx.<JuheHttpResponse<JokeBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<JokeBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<JokeBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<JokeBean.ResultBean>() {
                     @Override
@@ -56,7 +56,7 @@ public class JokePresenter extends RxPresenter<JokeContract.View> implements Jok
     public void getMoreData() {
         mPageSize = mPageSize + 10;
         Subscription rxSubscription = mRetrofitHelper.fetchJokeBean(mPage,mPageSize,mSort,mTime)
-                .compose(ZRx.<JuheHttpResponse<JokeBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<JokeBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<JokeBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<JokeBean.ResultBean>() {
                     @Override

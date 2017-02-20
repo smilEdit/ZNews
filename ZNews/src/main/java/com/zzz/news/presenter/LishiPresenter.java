@@ -2,7 +2,7 @@ package com.zzz.news.presenter;
 
 import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.LishiBean;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.LishiContract;
 import com.zzz.news.util.ZRx;
@@ -31,7 +31,7 @@ public class LishiPresenter extends RxPresenter<LishiContract.View> implements L
     @Override
     public void getLishiData(int month, int day) {
         Subscription rxSubscription = mRetrofitHelper.fetchLishiInfo(month,day)
-                .compose(ZRx.<JuheHttpResponse<List<LishiBean.ResultBean>>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<List<LishiBean.ResultBean>>>rxSchedulerHelper())
                 .compose(ZRx.<List<LishiBean.ResultBean>>handleJhResult())
                 .subscribe(new Action1<List<LishiBean.ResultBean>>() {
                     @Override

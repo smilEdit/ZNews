@@ -206,11 +206,11 @@ public class RetrofitHelper {
         return juheRetrofit.create(JuHeApis.class);
     }
 
-    public Observable<JuheHttpResponse<TopNewsBean.ResultBean>> fetchTopNewsList() {
+    public Observable<JuHeHttpResponse<TopNewsBean.ResultBean>> fetchTopNewsList() {
         return sJuHeApis.getTopNewsList();
     }
 
-    public Observable<JuheHttpResponse<WeixinBean.ResultBean>> fetchWeixinList(int ps, int pno) {
+    public Observable<JuHeHttpResponse<WeixinBean.ResultBean>> fetchWeixinList(int ps, int pno) {
         return sJuHeApis.getWeixinList(Constants.JUHE_WEIXIN_KEY, ps, pno);
     }
 
@@ -227,7 +227,7 @@ public class RetrofitHelper {
 
     //getJokeList(@Query("key")String key,@Query("page")int page,
     //@Query("pagesize") int pagesize, @Query("sort") String sort, @Query("time") String time);
-    public Observable<JuheHttpResponse<JokeBean.ResultBean>> fetchJokeBean(int page, int pagesize, String sort, String time) {
+    public Observable<JuHeHttpResponse<JokeBean.ResultBean>> fetchJokeBean(int page, int pagesize, String sort, String time) {
         return sJuheApis.getJokeList(Constants.JUHE_JOKE_KEY, page, pagesize, sort, time);
     }
 
@@ -242,7 +242,7 @@ public class RetrofitHelper {
         return juheRetrofit.create(JuHeApis.class);
     }
 
-    public Observable<JuheHttpResponse<RobotBean.ResultBean>> fetchRobotAnswer(String info) {
+    public Observable<JuHeHttpResponse<RobotBean.ResultBean>> fetchRobotAnswer(String info) {
         return sJuheRApis.getRobotInfo(info, Constants.JUHE_ROBOT_KEY);
     }
 
@@ -257,7 +257,7 @@ public class RetrofitHelper {
         return juheRetrofit.create(JuHeApis.class);
     }
 
-    public Observable<JuheHttpResponse<List<LishiBean.ResultBean>>> fetchLishiInfo(int month, int day) {
+    public Observable<JuHeHttpResponse<List<LishiBean.ResultBean>>> fetchLishiInfo(int month, int day) {
         return sJuHeLApis.getLishiInfo(Constants.JUHE_LISHI_KEY, "1.0", month, day);
     }
 }

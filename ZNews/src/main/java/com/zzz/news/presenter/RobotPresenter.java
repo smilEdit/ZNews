@@ -2,7 +2,7 @@ package com.zzz.news.presenter;
 
 import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.RobotBean;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.RobotContract;
 import com.zzz.news.util.ZLog;
@@ -30,7 +30,7 @@ public class RobotPresenter extends RxPresenter<RobotContract.View> implements R
     @Override
     public void getRobotData(String question) {
         Subscription rxSubscription = mRetrofitHelper.fetchRobotAnswer(question)
-                .compose(ZRx.<JuheHttpResponse<RobotBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<RobotBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<RobotBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<RobotBean.ResultBean>() {
                     @Override

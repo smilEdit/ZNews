@@ -5,7 +5,7 @@ package com.zzz.news.model.http;
  * @创建时间 2016/9/28 14:08
  */
 
-public class JuheHttpResponse<T> {
+public class JuHeHttpResponse<T> {
     public static final int SUCCESS_CODE = 0;
 
     private int error_code;

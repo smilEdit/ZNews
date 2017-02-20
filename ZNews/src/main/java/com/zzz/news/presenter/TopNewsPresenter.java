@@ -2,7 +2,7 @@ package com.zzz.news.presenter;
 
 import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.TopNewsBean;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.TopNewsContract;
 import com.zzz.news.util.ZLog;
@@ -30,7 +30,7 @@ public class TopNewsPresenter extends RxPresenter<TopNewsContract.View> implemen
     @Override
     public void getTopNewsData() {
         Subscription rxSubscription = mRetrofitHelper.fetchTopNewsList()
-                .compose(ZRx.<JuheHttpResponse<TopNewsBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<TopNewsBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<TopNewsBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<TopNewsBean.ResultBean>() {
                     @Override

@@ -32,7 +32,7 @@ public interface JuHeApis {
      * @return
      */
     @GET("toutiao/index?type=top&key=bd8e0a7114136f806abe023bfd16d4d6")
-    Observable<JuheHttpResponse<TopNewsBean.ResultBean>> getTopNewsList();
+    Observable<JuHeHttpResponse<TopNewsBean.ResultBean>> getTopNewsList();
 
 
     /**
@@ -41,7 +41,7 @@ public interface JuHeApis {
      * @return
      */
     @GET("joke/content/list.from")
-    Observable<JuheHttpResponse<JokeBean.ResultBean>> getJokeList(@Query("key")String key,@Query("page")int page,@Query("pagesize")int pagesize,@Query("sort")String sort,@Query("time")String time);
+    Observable<JuHeHttpResponse<JokeBean.ResultBean>> getJokeList(@Query("key")String key,@Query("page")int page,@Query("pagesize")int pagesize,@Query("sort")String sort,@Query("time")String time);
 
     /**
      * 微信精选
@@ -49,7 +49,7 @@ public interface JuHeApis {
      * @return
      */
     @GET("weixin/query")
-    Observable<JuheHttpResponse<WeixinBean.ResultBean>> getWeixinList(@Query("key") String key,@Query("ps")int ps,@Query("pno")int pno);
+    Observable<JuHeHttpResponse<WeixinBean.ResultBean>> getWeixinList(@Query("key") String key,@Query("ps")int ps,@Query("pno")int pno);
 
     /**
      * 机器人
@@ -57,7 +57,7 @@ public interface JuHeApis {
      * @return
      */
     @GET("robot/index")
-    Observable<JuheHttpResponse<RobotBean.ResultBean>> getRobotInfo(@Query("info") String info, @Query("key") String key);
+    Observable<JuHeHttpResponse<RobotBean.ResultBean>> getRobotInfo(@Query("info") String info, @Query("key") String key);
 
     /**
      * 历史上的今天
@@ -65,6 +65,6 @@ public interface JuHeApis {
      * @return
      */
     @GET("japi/toh")
-    Observable<JuheHttpResponse<List<LishiBean.ResultBean>>>getLishiInfo(@Query("key")String key, @Query("v")String v, @Query("month")int month, @Query("day")int day);
+    Observable<JuHeHttpResponse<List<LishiBean.ResultBean>>>getLishiInfo(@Query("key")String key, @Query("v")String v, @Query("month")int month, @Query("day")int day);
 
 }

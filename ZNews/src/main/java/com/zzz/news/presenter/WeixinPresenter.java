@@ -2,7 +2,7 @@ package com.zzz.news.presenter;
 
 import com.zzz.news.base.RxPresenter;
 import com.zzz.news.model.bean.WeixinBean;
-import com.zzz.news.model.http.JuheHttpResponse;
+import com.zzz.news.model.http.JuHeHttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.presenter.contract.WeixinContract;
 import com.zzz.news.util.ZLog;
@@ -34,7 +34,7 @@ public class WeixinPresenter extends RxPresenter<WeixinContract.View> implements
     public void getWeixinData() {
         pno = 1;
         Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,pno)
-                .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<WeixinBean.ResultBean>() {
                     @Override
@@ -55,7 +55,7 @@ public class WeixinPresenter extends RxPresenter<WeixinContract.View> implements
         ps = ps + 20;
         ZLog.i(pno+"");
         Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,pno)
-                .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<WeixinBean.ResultBean>() {
                     @Override
@@ -74,7 +74,7 @@ public class WeixinPresenter extends RxPresenter<WeixinContract.View> implements
     @Override
     public void getNewContent() {
         Subscription rxSubscription = mRetrofitHelper.fetchWeixinList(ps,++pno)
-                .compose(ZRx.<JuheHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
+                .compose(ZRx.<JuHeHttpResponse<WeixinBean.ResultBean>>rxSchedulerHelper())
                 .compose(ZRx.<WeixinBean.ResultBean>handleJhResult())
                 .subscribe(new Action1<WeixinBean.ResultBean>() {
                     @Override
