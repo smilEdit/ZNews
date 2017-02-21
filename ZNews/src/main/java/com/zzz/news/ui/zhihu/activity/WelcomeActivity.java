@@ -7,7 +7,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zzz.news.R;
 import com.zzz.news.base.BaseActivity;
-import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.presenter.contract.WelcomeContract;
 import com.zzz.news.presenter.contract.WelcomePresenter;
 import com.zzz.news.ui.main.activity.MainActivity;
@@ -25,8 +24,8 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
 
     @BindView(R.id.iv_welcome_bg)
     ImageView mIvWelcomeBg;
-    @BindView(R.id.tv_welcome_author)
-    TextView  mTvWelcomeAuthor;
+//    @BindView(R.id.tv_welcome_author)
+//    TextView  mTvWelcomeAuthor;
 
     @Override
     protected void initEventAndData() {
@@ -44,10 +43,10 @@ public class WelcomeActivity extends BaseActivity<WelcomePresenter> implements W
     }
 
     @Override
-    public void showContent(WelcomeBean welcomeBean) {
-        ZImageLoader.setImg(this,welcomeBean.getImg(),mIvWelcomeBg);
+    public void showContent(String string) {
+        ZImageLoader.setImg(this,string,mIvWelcomeBg);
         mIvWelcomeBg.animate().scaleX(1.12f).scaleY(1.12f).setDuration(2000).setStartDelay(100).start();
-        mTvWelcomeAuthor.setText(welcomeBean.getText());
+//        mTvWelcomeAuthor.setText(welcomeBean.getText());
     }
 
     @Override

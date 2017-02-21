@@ -9,7 +9,6 @@ import com.zzz.news.model.bean.SectionChildListBean;
 import com.zzz.news.model.bean.SectionListBean;
 import com.zzz.news.model.bean.ThemeChildListBean;
 import com.zzz.news.model.bean.ThemeListBean;
-import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.model.bean.ZhihuDetailBean;
 
 import retrofit2.http.GET;
@@ -57,8 +56,8 @@ public interface ZhihuApis {
     /**
      * 欢迎界面
      */
-    @GET("start-image/{res}")
-    Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
+//    @GET("start-image/{res}")
+//    Observable<WelcomeBean> getWelcomeInfo(@Path("res") String res);
 
     /**
      * 长评论

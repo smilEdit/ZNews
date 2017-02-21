@@ -1,11 +1,13 @@
 package com.zzz.news.presenter.contract;
 
 import com.zzz.news.base.RxPresenter;
-import com.zzz.news.model.bean.WelcomeBean;
+import com.zzz.news.model.bean.GankItemBean;
+import com.zzz.news.model.http.HttpResponse;
 import com.zzz.news.model.http.RetrofitHelper;
 import com.zzz.news.util.ZLog;
 import com.zzz.news.util.ZRx;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -34,12 +36,13 @@ public class WelcomePresenter extends RxPresenter<WelcomeContract.View> implemen
 
     @Override
     public void getWelcomeData() {
-        Subscription rxSubscription = mRetrofitHelper.fetchWelcomeBean(RES)
-                .compose(ZRx.<WelcomeBean>rxSchedulerHelper())
-                .subscribe(new Action1<WelcomeBean>() {
+        Subscription rxSubscription = mRetrofitHelper.fetchFuliImage(1)
+                .compose(ZRx.<HttpResponse<List<GankItemBean>>>rxSchedulerHelper())
+                .compose(ZRx.<List<GankItemBean>>handleResult())
+                .subscribe(new Action1<List<GankItemBean>>() {
                     @Override
-                    public void call(WelcomeBean welcomeBean) {
-                        mView.showContent(welcomeBean);
+                    public void call(List<GankItemBean> list) {
+                        mView.showContent(list.get(0).getUrl());
                         startCountDown();
                     }
                 }, new Action1<Throwable>() {

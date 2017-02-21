@@ -2,7 +2,7 @@ package com.zzz.news.presenter.contract;
 
 import com.zzz.news.base.BasePresenter;
 import com.zzz.news.base.BaseView;
-import com.zzz.news.model.bean.WelcomeBean;
+import com.zzz.news.model.bean.GankItemBean;
 
 /**
  * @创建者 zlf
@@ -11,7 +11,7 @@ import com.zzz.news.model.bean.WelcomeBean;
 
 public interface WelcomeContract  {
     interface View extends BaseView {
-        void showContent(WelcomeBean welcomeBean);
+        void showContent(String string);
 
         void jump2Main();
     }

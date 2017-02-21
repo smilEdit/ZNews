@@ -17,7 +17,6 @@ import com.zzz.news.model.bean.ThemeChildListBean;
 import com.zzz.news.model.bean.ThemeListBean;
 import com.zzz.news.model.bean.TopNewsBean;
 import com.zzz.news.model.bean.WeixinBean;
-import com.zzz.news.model.bean.WelcomeBean;
 import com.zzz.news.model.bean.ZhihuDetailBean;
 import com.zzz.news.util.ZSystem;
 
@@ -144,9 +143,9 @@ public class RetrofitHelper {
         return zhihuApiService.getDetailInfo(id);
     }
 
-    public Observable<WelcomeBean> fetchWelcomeBean(String res) {
-        return zhihuApiService.getWelcomeInfo(res);
-    }
+//    public Observable<WelcomeBean> fetchWelcomeBean() {
+//        return sGankApis.getFuliList(1);
+//    }
 
     public Observable<CommentBean> fetchLongCommentBean(int id) {
         return zhihuApiService.getLongCommentInfo(id);
