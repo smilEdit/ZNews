@@ -1,8 +1,9 @@
-##ZNew
+##ZNews
+
 
 学习新技术  MVP + Retrofit + RxJava + Dagger2  + Reaml
 
- 纯粹的阅读App，出于学习的目的做的这个应用，采用的各个框架都是目前Android开发比较新比较常用的.
+ 出于学习目的做的阅读App，采用的各个框架都是目前Android开发比较新比较常用的。（框架搭建方面学习了LookLook，GeekNews开源应用）
  Api获取来源于聚合数据(前几天推出会员制,没有免费了好像)，知乎日报，干货集中营。
  目前只是实现了最基本的阅读功能，还存在一些Bug。
  用了许多开源的三方的，像下拉小游戏，Yalantis的ContextMenu，比较炫酷的Depth-LIB-Android。
